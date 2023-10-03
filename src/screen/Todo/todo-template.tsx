@@ -7,8 +7,36 @@ import {
   View,
 } from "react-native";
 import { styles } from "./styles";
+import { useState } from "react";
 
 export default function TodoTemplate() {
+  const [listTodo, setListTodo] = useState([
+    {
+      value: "Lista de tarefas 1",
+      todo: false,
+    },
+    {
+      value: "Lista de tarefas 2",
+      todo: true,
+    },
+    {
+      value: "Lista de tarefas 3",
+      todo: false,
+    },
+    {
+      value: "Lista de tarefas 4",
+      todo: true,
+    },
+    {
+      value: "Lista de tarefas 5",
+      todo: false,
+    },
+    {
+      value: "Lista de tarefas 6",
+      todo: false,
+    },
+  ]);
+
   const handleDeleteTask = () => {
     console.log("Task deleted!");
   };
@@ -44,27 +72,35 @@ export default function TodoTemplate() {
         </View>
       </View>
 
-      <View style={styles.emptyListTodo}>
-        <Image source={require("../../assets/clipboard/clip.png")} />
-        <Text style={styles.emptyListTodoText}>
-          Você ainda não tem tarefas cadastradas
-        </Text>
-        <Text style={styles.emptyListTodoTextAlert}>
-          Crie tarefas e organize seus itens a fazer
-        </Text>
-      </View>
+      {!listTodo.length && (
+        <View style={styles.emptyListTodo}>
+          <Image source={require("../../assets/clipboard/clip.png")} />
+          <Text style={styles.emptyListTodoText}>
+            Você ainda não tem tarefas cadastradas
+          </Text>
+          <Text style={styles.emptyListTodoTextAlert}>
+            Crie tarefas e organize seus itens a fazer
+          </Text>
+        </View>
+      )}
 
       <FlatList
         style={styles.listTodo}
-        data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
-        renderItem={() => (
-          <View style={styles.cardTodo}>
+        data={listTodo}
+        renderItem={({ item }) => (
+          <View key={item.value} style={styles.cardTodo}>
             <TouchableOpacity>
-              <Image
-                source={require("../../assets/checkFalse/checkFalse.png")}
-              />
+              {item.todo ? (
+                <Image
+                  source={require("../../assets/checkTrue/checkTrue.png")}
+                />
+              ) : (
+                <Image
+                  source={require("../../assets/checkFalse/checkFalse.png")}
+                />
+              )}
             </TouchableOpacity>
-            <Text style={styles.cardTodoText}>Lista de tarefas</Text>
+            <Text style={styles.cardTodoText}>{item.value}</Text>
             <TouchableOpacity
               style={styles.cardTodoIconTrash}
               onPress={handleDeleteTask}
@@ -73,7 +109,6 @@ export default function TodoTemplate() {
             </TouchableOpacity>
           </View>
         )}
-        keyExtractor={(item) => item.toString()}
       />
     </View>
   );
