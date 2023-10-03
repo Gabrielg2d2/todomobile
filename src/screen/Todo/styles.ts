@@ -4,9 +4,11 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#1A1A1A",
+    alignItems: "center",
   },
   header: {
     height: 150,
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#000",
@@ -50,8 +52,62 @@ export const styles = StyleSheet.create({
     borderColor: "#333",
     height: 50,
   },
+  informationTodoNumber: {
+    color: "#D9D9D9",
+    fontSize: 14,
+    backgroundColor: "#333",
+    width: 22,
+    height: 20,
+    borderRadius: 30,
+    textAlign: "center",
+    marginLeft: 10,
+  },
+  informationTodoAlign: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  informationTodoTextCreate: {
+    color: "#4EA8DE",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  informationTodoTextConcluded: {
+    color: "#8284FA",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  emptyListTodo: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 32,
+  },
+  emptyListTodoText: {
+    color: "#808080",
+    fontSize: 14,
+    fontWeight: "bold",
+    marginTop: 10,
+  },
+  emptyListTodoTextAlert: {
+    color: "#808080",
+    fontSize: 14,
+  },
   cardTodo: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    alignItems: "center",
+    borderColor: "#333",
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 10,
+    backgroundColor: "#262626",
+    width: "90%",
+  },
+  cardTodoText: {
+    color: "#F2F2F2",
+    fontSize: 14,
+    marginLeft: 10,
+    maxWidth: "75%",
+  },
+  cardTodoIconTrash: {
+    marginLeft: "auto",
   },
 });
