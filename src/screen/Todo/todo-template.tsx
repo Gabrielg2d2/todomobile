@@ -13,8 +13,8 @@ type TodoTemplateProps = {
     value: string;
     todo: boolean;
   }>;
-  handleDeleteTask: () => void;
-  handleAddTask: () => void;
+  handleDeleteTodo: () => void;
+  handleAddTodo: () => void;
 };
 
 export default function TodoTemplate(props: TodoTemplateProps) {
@@ -31,7 +31,7 @@ export default function TodoTemplate(props: TodoTemplateProps) {
         />
         <TouchableOpacity
           style={styles.buttonAddTodo}
-          onPress={props.handleAddTask}
+          onPress={props.handleAddTodo}
         >
           <Text style={styles.textAddTodo}>+</Text>
         </TouchableOpacity>
@@ -79,7 +79,7 @@ export default function TodoTemplate(props: TodoTemplateProps) {
             <Text style={styles.cardTodoText}>{item.value}</Text>
             <TouchableOpacity
               style={styles.cardTodoIconTrash}
-              onPress={props.handleDeleteTask}
+              onPress={props.handleDeleteTodo}
             >
               <Image source={require("../../assets/trash/trash.png")} />
             </TouchableOpacity>

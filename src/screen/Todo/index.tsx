@@ -33,18 +33,18 @@ export function Todo() {
     },
   ]);
 
-  const handleDeleteTask = () => {
+  const handleDeleteTodo = () => {
     console.log("Task deleted!");
   };
 
-  const handleAddTask = () => {
+  const handleAddTodo = () => {
     console.log("Task added!");
   };
 
   const templateProps = {
     listTodo,
-    handleDeleteTask,
-    handleAddTask,
+    handleDeleteTodo,
+    handleAddTodo,
   };
 
   return <TodoTemplate {...templateProps} />;
