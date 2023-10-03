@@ -41,11 +41,11 @@ export function Todo() {
     console.log("Task added!");
   };
 
-  const templsteProps = {
+  const templateProps = {
     listTodo,
     handleDeleteTask,
     handleAddTask,
   };
 
-  return <TodoTemplate {...templsteProps} />;
+  return <TodoTemplate {...templateProps} />;
 }
