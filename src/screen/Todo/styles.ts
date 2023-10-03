@@ -93,6 +93,11 @@ export const styles = StyleSheet.create({
     color: "#808080",
     fontSize: 14,
   },
+  listTodo: {
+    width: "90%",
+    marginTop: 10,
+    marginBottom: 10,
+  },
   cardTodo: {
     flexDirection: "row",
     alignItems: "center",
@@ -101,7 +106,7 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 10,
     backgroundColor: "#262626",
-    width: "90%",
+    marginTop: 10,
   },
   cardTodoText: {
     color: "#F2F2F2",

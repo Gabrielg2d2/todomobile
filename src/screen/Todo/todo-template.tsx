@@ -1,4 +1,11 @@
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { styles } from "./styles";
 
 export default function TodoTemplate() {
@@ -47,18 +54,27 @@ export default function TodoTemplate() {
         </Text>
       </View>
 
-      <View style={styles.cardTodo}>
-        <TouchableOpacity>
-          <Image source={require("../../assets/checkFalse/checkFalse.png")} />
-        </TouchableOpacity>
-        <Text style={styles.cardTodoText}>Lista de tarefas</Text>
-        <TouchableOpacity
-          style={styles.cardTodoIconTrash}
-          onPress={handleDeleteTask}
-        >
-          <Image source={require("../../assets/trash/trash.png")} />
-        </TouchableOpacity>
-      </View>
+      <FlatList
+        style={styles.listTodo}
+        data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
+        renderItem={() => (
+          <View style={styles.cardTodo}>
+            <TouchableOpacity>
+              <Image
+                source={require("../../assets/checkFalse/checkFalse.png")}
+              />
+            </TouchableOpacity>
+            <Text style={styles.cardTodoText}>Lista de tarefas</Text>
+            <TouchableOpacity
+              style={styles.cardTodoIconTrash}
+              onPress={handleDeleteTask}
+            >
+              <Image source={require("../../assets/trash/trash.png")} />
+            </TouchableOpacity>
+          </View>
+        )}
+        keyExtractor={(item) => item.toString()}
+      />
     </View>
   );
 }
