@@ -7,44 +7,17 @@ import {
   View,
 } from "react-native";
 import { styles } from "./styles";
-import { useState } from "react";
 
-export default function TodoTemplate() {
-  const [listTodo, setListTodo] = useState([
-    {
-      value: "Lista de tarefas 1",
-      todo: false,
-    },
-    {
-      value: "Lista de tarefas 2",
-      todo: true,
-    },
-    {
-      value: "Lista de tarefas 3",
-      todo: false,
-    },
-    {
-      value: "Lista de tarefas 4",
-      todo: true,
-    },
-    {
-      value: "Lista de tarefas 5",
-      todo: false,
-    },
-    {
-      value: "Lista de tarefas 6",
-      todo: false,
-    },
-  ]);
+type TodoTemplateProps = {
+  listTodo: Array<{
+    value: string;
+    todo: boolean;
+  }>;
+  handleDeleteTask: () => void;
+  handleAddTask: () => void;
+};
 
-  const handleDeleteTask = () => {
-    console.log("Task deleted!");
-  };
-
-  const handleAddTask = () => {
-    console.log("Task added!");
-  };
-
+export default function TodoTemplate(props: TodoTemplateProps) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -56,7 +29,10 @@ export default function TodoTemplate() {
           placeholder="Adicione uma nova tarefa"
           placeholderTextColor={"#808080"}
         />
-        <TouchableOpacity style={styles.buttonAddTodo} onPress={handleAddTask}>
+        <TouchableOpacity
+          style={styles.buttonAddTodo}
+          onPress={props.handleAddTask}
+        >
           <Text style={styles.textAddTodo}>+</Text>
         </TouchableOpacity>
       </View>
@@ -72,7 +48,7 @@ export default function TodoTemplate() {
         </View>
       </View>
 
-      {!listTodo.length && (
+      {!props.listTodo.length && (
         <View style={styles.emptyListTodo}>
           <Image source={require("../../assets/clipboard/clip.png")} />
           <Text style={styles.emptyListTodoText}>
@@ -86,7 +62,7 @@ export default function TodoTemplate() {
 
       <FlatList
         style={styles.listTodo}
-        data={listTodo}
+        data={props.listTodo}
         renderItem={({ item }) => (
           <View key={item.value} style={styles.cardTodo}>
             <TouchableOpacity>
@@ -103,7 +79,7 @@ export default function TodoTemplate() {
             <Text style={styles.cardTodoText}>{item.value}</Text>
             <TouchableOpacity
               style={styles.cardTodoIconTrash}
-              onPress={handleDeleteTask}
+              onPress={props.handleDeleteTask}
             >
               <Image source={require("../../assets/trash/trash.png")} />
             </TouchableOpacity>
