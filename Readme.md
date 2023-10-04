@@ -56,6 +56,4 @@ Também, optei por trabalhar salvando as informações local, isso pode ser faci
 
 <img src="./doc/mobile2.jpeg" width="250" height="500" />
 
-<img src="./doc/mobile3.jpeg" width="250" height="500" />
-
 </div>
