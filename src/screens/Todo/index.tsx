@@ -1,49 +1,54 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import TodoTemplate from "./todo-template";
+import { ITodoItem, NewTodoType, TodoMain } from "../../domain/todo/main";
+import { Alert } from "react-native";
 
 export function Todo() {
-  const [listTodo, setListTodo] = useState([
-    {
-      title: "Lista de tarefas 1",
-      isDone: false,
-    },
-    {
-      title: "Lista de tarefas 2",
-      isDone: true,
-    },
-    {
-      title: "Lista de tarefas 3",
-      isDone: false,
-    },
-    {
-      title: "Lista de tarefas 4",
-      isDone: true,
-    },
-    {
-      title: "Lista de tarefas 5",
-      isDone: false,
-    },
-    {
-      title: "Lista de tarefas 6",
-      isDone: false,
-    },
-    {
-      title: "Lista de tarefas 7",
-      isDone: false,
-    },
-  ]);
+  const [todoMain] = useState(new TodoMain());
+  const [listTodo, setListTodo] = useState<ITodoItem[]>([]);
 
-  const handleDeleteTodo = () => {
-    console.log("Task deleted!");
-  };
+  async function getAllTodo() {
+    const result = await todoMain.getTodoAll();
+    setListTodo(result);
+  }
 
-  const handleAddTodo = () => {
-    console.log("Task added!");
-  };
+  async function handleDeleteTodo(id: string) {
+    const result = await todoMain.removeTodo(id);
+    if (result.success) {
+      return getAllTodo();
+    }
 
-  const handleToggleTodo = () => {
-    console.log("Task toggled!");
-  };
+    result.errorMessages.forEach((message) => {
+      Alert.alert("Erro", message);
+    });
+  }
+
+  async function handleAddTodo(newTodo: NewTodoType) {
+    const result = await todoMain.addTodo(newTodo);
+    if (result.success) {
+      return getAllTodo();
+    }
+
+    result.errorMessages.forEach((message) => {
+      Alert.alert("Erro", message);
+    });
+  }
+
+  async function handleToggleTodo(todo: ITodoItem) {
+    const result = await todoMain.toggleDone(todo);
+
+    if (result.success) {
+      return getAllTodo();
+    }
+
+    result.errorMessages.forEach((message) => {
+      Alert.alert("Erro", message);
+    });
+  }
+
+  useEffect(() => {
+    getAllTodo();
+  }, [listTodo]);
 
   const templateProps = {
     listTodo,

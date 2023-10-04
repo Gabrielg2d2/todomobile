@@ -7,7 +7,7 @@ type ReturnProps = {
   success: boolean;
 };
 
-export class TodoMain {
+class TodoMain {
   listTodo: ITodoItem[] = [];
 
   constructor(
@@ -77,3 +77,5 @@ export class TodoMain {
     return result;
   }
 }
+
+export { TodoMain, ITodoItem, NewTodoType };

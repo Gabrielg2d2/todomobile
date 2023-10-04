@@ -7,18 +7,23 @@ import {
   View,
 } from "react-native";
 import { styles } from "./styles";
+import { ITodoItem, NewTodoType } from "../../domain/todo/main";
+import { useState } from "react";
 
 type TodoTemplateProps = {
-  listTodo: Array<{
-    title: string;
-    isDone: boolean;
-  }>;
-  handleDeleteTodo: () => void;
-  handleAddTodo: () => void;
-  handleToggleTodo: () => void;
+  listTodo: ITodoItem[];
+  handleDeleteTodo: (id: string) => void;
+  handleAddTodo: (newTodo: NewTodoType) => void;
+  handleToggleTodo: (todo: ITodoItem) => void;
 };
 
 export default function TodoTemplate(props: TodoTemplateProps) {
+  const [valueInputTodo, setValueInputTodo] = useState("");
+
+  function handleInputTodoChange(text: string) {
+    setValueInputTodo(text);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -26,13 +31,21 @@ export default function TodoTemplate(props: TodoTemplateProps) {
       </View>
       <View style={styles.alignInput}>
         <TextInput
-          style={styles.inputTodo}
+          style={valueInputTodo ? styles.inputTodoFocus : styles.inputTodo}
           placeholder="Adicione uma nova tarefa"
           placeholderTextColor={"#808080"}
+          value={valueInputTodo}
+          onChangeText={handleInputTodoChange}
         />
         <TouchableOpacity
           style={styles.buttonAddTodo}
-          onPress={props.handleAddTodo}
+          onPress={() => {
+            props.handleAddTodo({
+              title: valueInputTodo,
+              isDone: false,
+            });
+            setValueInputTodo("");
+          }}
         >
           <Text style={styles.textAddTodo}>+</Text>
         </TouchableOpacity>
@@ -66,7 +79,10 @@ export default function TodoTemplate(props: TodoTemplateProps) {
         data={props.listTodo}
         renderItem={({ item }) => (
           <View key={item.title} style={styles.cardTodo}>
-            <TouchableOpacity onPress={props.handleToggleTodo}>
+            <TouchableOpacity
+              style={styles.cardTodoToggle}
+              onPress={() => props.handleToggleTodo(item)}
+            >
               {item.isDone ? (
                 <Image
                   source={require("../../assets/checkTrue/checkTrue.png")}
@@ -76,11 +92,12 @@ export default function TodoTemplate(props: TodoTemplateProps) {
                   source={require("../../assets/checkFalse/checkFalse.png")}
                 />
               )}
+
+              <Text style={styles.cardTodoText}>{item.title}</Text>
             </TouchableOpacity>
-            <Text style={styles.cardTodoText}>{item.title}</Text>
             <TouchableOpacity
               style={styles.cardTodoIconTrash}
-              onPress={props.handleDeleteTodo}
+              onPress={() => props.handleDeleteTodo(item.id)}
             >
               <Image source={require("../../assets/trash/trash.png")} />
             </TouchableOpacity>
