@@ -1,6 +1,11 @@
 import { ITodoItem } from "./repository/interfaces";
 import { Repository } from "./repository/repository";
 
+type ReturnProps = {
+  errorMessages: string[];
+  success: boolean;
+};
+
 export class TodoMain {
   constructor(private repository = new Repository()) {}
 
@@ -10,10 +15,30 @@ export class TodoMain {
     await this.repository.updateTodoItem(todo);
   }
 
-  async addTodo(newTodo: ITodoItem): Promise<void> {
-    // verifica se o título é vazio
-    // verifica se o título já existe
+  async addTodo(newTodo: ITodoItem): Promise<ReturnProps> {
+    if (!newTodo.title) {
+      return {
+        errorMessages: ["O título não pode ser vazio"],
+        success: false,
+      };
+    }
+
+    const todoList = await this.repository.getTodoAll();
+    const todoAlreadyExists = todoList.find(
+      (todoItem) => todoItem.title === newTodo.title
+    );
+    if (todoAlreadyExists) {
+      return {
+        errorMessages: ["O todo já existe"],
+        success: false,
+      };
+    }
     await this.repository.addTodoItem(newTodo);
+
+    return {
+      errorMessages: [],
+      success: true,
+    };
   }
 
   async removeTodo(id: string): Promise<void> {
