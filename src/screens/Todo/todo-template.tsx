@@ -58,6 +58,7 @@ export default function TodoTemplate(props: TodoTemplateProps) {
           onChangeText={handleInputTodoChange}
         />
         <TouchableOpacity
+          disabled={!valueInputTodo}
           style={styles.buttonAddTodo}
           onPress={() => {
             props.handleAddTodo({
