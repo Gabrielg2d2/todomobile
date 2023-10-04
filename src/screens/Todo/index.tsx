@@ -13,14 +13,31 @@ export function Todo() {
   }, []);
 
   async function handleDeleteTodo(id: string) {
-    const result = await todoMain.removeTodo(id);
-    if (result.success) {
-      return getAllTodo();
-    }
+    Alert.alert(
+      "Excluir",
+      "Deseja realmente excluir este item?",
+      [
+        {
+          text: "Não",
+          onPress: () => {},
+          style: "cancel",
+        },
+        {
+          text: "Sim",
+          onPress: async () => {
+            const result = await todoMain.removeTodo(id);
+            if (result.success) {
+              return getAllTodo();
+            }
 
-    result.errorMessages.forEach((message) => {
-      Alert.alert("Erro", message);
-    });
+            result.errorMessages.forEach((message) => {
+              Alert.alert("Erro", message);
+            });
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   }
 
   async function handleAddTodo(newTodo: NewTodoType) {
