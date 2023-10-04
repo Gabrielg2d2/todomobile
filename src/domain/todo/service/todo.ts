@@ -7,4 +7,15 @@ export class Service {
     );
     return !!todoAlreadyExists;
   }
+
+  static separateTodo(listTodo: ITodoItem[]) {
+    const quantityTodoCreated = listTodo.length;
+
+    const allTodoCompleted = listTodo.filter((todoItem) => todoItem.isDone);
+
+    return {
+      quantityTodoCreated,
+      allTodoCompleted: allTodoCompleted.length,
+    };
+  }
 }

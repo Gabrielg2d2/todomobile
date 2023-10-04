@@ -12,6 +12,10 @@ import { useMemo, useState } from "react";
 
 type TodoTemplateProps = {
   listTodo: ITodoItem[];
+  informationTodos: {
+    quantityTodoCreated: number;
+    allTodoCompleted: number;
+  };
   handleDeleteTodo: (id: string) => void;
   handleAddTodo: (newTodo: NewTodoType) => void;
   handleToggleTodo: (todo: ITodoItem) => void;
@@ -70,11 +74,15 @@ export default function TodoTemplate(props: TodoTemplateProps) {
       <View style={styles.informationTodo}>
         <View style={styles.informationTodoAlign}>
           <Text style={styles.informationTodoTextCreate}>Criadas</Text>
-          <Text style={styles.informationTodoNumber}>0</Text>
+          <Text style={styles.informationTodoNumber}>
+            {props.informationTodos.quantityTodoCreated}
+          </Text>
         </View>
         <View style={styles.informationTodoAlign}>
           <Text style={styles.informationTodoTextConcluded}>Concluídas</Text>
-          <Text style={styles.informationTodoNumber}>0</Text>
+          <Text style={styles.informationTodoNumber}>
+            {props.informationTodos.allTodoCompleted}
+          </Text>
         </View>
       </View>
 

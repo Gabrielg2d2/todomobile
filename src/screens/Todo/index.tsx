@@ -6,10 +6,18 @@ import { Alert } from "react-native";
 export function Todo() {
   const [todoMain] = useState(new TodoMain());
   const [listTodo, setListTodo] = useState<ITodoItem[]>([]);
+  const [informationTodos, setInformationTodos] = useState({
+    quantityTodoCreated: 0,
+    allTodoCompleted: 0,
+  });
 
   const getAllTodo = useCallback(async () => {
     const result = await todoMain.getTodoAll();
-    setListTodo(result);
+    setListTodo(result.listTodo);
+    setInformationTodos({
+      quantityTodoCreated: result.quantityTodoCreated,
+      allTodoCompleted: result.allTodoCompleted,
+    });
   }, []);
 
   async function handleDeleteTodo(id: string) {
@@ -69,6 +77,7 @@ export function Todo() {
 
   const templateProps = {
     listTodo,
+    informationTodos,
     handleDeleteTodo,
     handleAddTodo,
     handleToggleTodo,

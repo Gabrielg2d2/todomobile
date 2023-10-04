@@ -71,10 +71,18 @@ class TodoMain {
     };
   }
 
-  async getTodoAll(): Promise<ITodoItem[]> {
+  async getTodoAll() {
     const result = await this.repository.getTodoAll();
     this.listTodo = result;
-    return result;
+
+    const { quantityTodoCreated, allTodoCompleted } =
+      this.service.separateTodo(result);
+
+    return {
+      listTodo: result,
+      quantityTodoCreated,
+      allTodoCompleted,
+    };
   }
 }
 
