@@ -2,7 +2,7 @@ import { AdapterLocalStorage } from "./adapter-local-storage";
 import { IRepository, ITodoItem } from "./interfaces";
 
 export class Repository implements IRepository {
-  constructor(private adapter: AdapterLocalStorage) {}
+  constructor(private adapter = new AdapterLocalStorage()) {}
 
   async addTodoItem(todoItem: ITodoItem): Promise<void> {
     await this.adapter.add(todoItem);

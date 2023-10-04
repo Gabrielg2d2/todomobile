@@ -1,7 +1,8 @@
-import { IRepository, ITodoItem } from "./repository/interfaces";
+import { ITodoItem } from "./repository/interfaces";
+import { Repository } from "./repository/repository";
 
 export class TodoMain {
-  constructor(private repository: IRepository) {}
+  constructor(private repository = new Repository()) {}
 
   async toggleDone(currentTodo: ITodoItem): Promise<void> {
     const todo = { ...currentTodo };
