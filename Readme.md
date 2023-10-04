@@ -1,59 +1,55 @@
 # todo-mobile
 
-### Tecnologias usada no projeto:
+### Technologies used in the project:
 
 - React-Native
 - Expo
 - React-native-async-storage/async-storage
 - Typescript
 
-### Comando para rodar o projeto:
+### Command to run the project:
 
 ```jsx
 npm run start ou yarn start ou npx expor start
 
 ```
 
-Este é um projeto simples, desenvolvido para consolidar meus conhecimentos em React Native.
+This is a simple project, developed to solidify my knowledge in React Native.
 
-O objetivo central do projeto é gerenciar uma lista de tarefas ("to-dos").
+The core objective of the project is to manage a to-do list.
 
-Dentro deste escopo, é possível adicionar, remover, visualizar a quantidade total de tarefas e verificar o número total de tarefas concluídas.
+Within this scope, it is possible to add, remove, view the total number of tasks, and check the total number of completed tasks.
 
-Mesmo sendo um projeto de escopo reduzido, escolhi adotar o padrão de Domain-Driven Design (DDD) para aprimorar ainda mais minha expertise nessa área.
+Despite being a project with a reduced scope, I chose to adopt the Domain-Driven Design (DDD) pattern to further enhance my expertise in this area.
 
-Todas as regras de negócio estão localizadas na pasta **`domain`**.
+All business rules are located in the domain folder.
 
-Os templates podem ser encontrados na pasta **`screen`** .
+Templates can be found in the screen folder.
 
-Segui a prática recomendada de separar as camadas de responsabilidades, o que facilitará qualquer manutenção ou expansão futura do projeto.
+I followed the recommended practice of separating responsibility layers, which will facilitate any future maintenance or expansion of the project.
 
-Priorizei manter o máximo do projeto o mais nativo possível, evitando a instalação de diversas bibliotecas externas.
+I prioritized keeping the project as native as possible, avoiding the installation of multiple external libraries.
 
-Além disso, optei por salvar as informações localmente. No entanto, graças ao DDD, é simples alterar esse comportamento: basta substituir o adaptador na pasta **`repositorio`**.
+Additionally, I chose to save the information locally. However, thanks to DDD, this behavior can be easily changed: just replace the adapter in the repository folder.
 
-Um projeto simples, para consolidar os conhecimentos em React-native.
+A simple project to solidify knowledge in React-native.
 
-A ideia inicial do projeto, é tem uma lista de todo, onde é permitido, adicionar, remover, visualizar a quantidade total de todos, e quantidade total de todos concluídos.
+The initial idea of the project is to have a to-do list, where one can add, remove, view the total number of tasks, and check the total number of completed tasks.
 
-Optei por trabalhar no padrão de DDD, ainda que simples o projeto, também com intuito de melhor meus conhecimentos.
+I chose to work with the DDD pattern, even though the project is simple, with the intention of improving my knowledge.
 
-Toda a regra de negócio está na pasta de ‘domain’.
+All the business rules are in the 'domain' folder.
 
-O template está na pasta de ‘scrren’.
+The template is in the 'screen' folder.
 
-Mantendo a boa prática de separar as camadas, facilitando qualquer manutenção ou incremento futuro no projeto.
+Keeping up with the best practice of separating the layers makes it easier for any future maintenance or addition to the project.
 
-Mantive o máximo possível do projeto nativo, evitando instalação de diversas libs.
+I kept the project as native as possible, avoiding the installation of many libraries.
 
-Também, optei por trabalhar salvando as informações local, isso pode ser facilmente alterado, graças ao DDD, basta trocar o adaptador da pasta de ‘repositorio’.
+Also, I chose to save the information locally. This can be easily changed thanks to DDD, just change the adapter in the 'repository' folder.
 
 <div style="display: flex; justify-content: space-between;">
-
 <img src="./doc/mobile.jpeg" width="250" height="500" />
-
 <img src="./doc/mobile1.jpeg" width="250" height="500" />
-
 <img src="./doc/mobile2.jpeg" width="250" height="500" />
-
 </div>
