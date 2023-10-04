@@ -9,10 +9,20 @@ type ReturnProps = {
 export class TodoMain {
   constructor(private repository = new Repository()) {}
 
-  async toggleDone(currentTodo: ITodoItem): Promise<void> {
+  async toggleDone(currentTodo: ITodoItem): Promise<ReturnProps> {
+    if (!currentTodo.id)
+      return {
+        errorMessages: ["O id não pode ser vazio"],
+        success: false,
+      };
     const todo = { ...currentTodo };
     todo.isDone = !todo.isDone;
     await this.repository.updateTodoItem(todo);
+
+    return {
+      errorMessages: [],
+      success: true,
+    };
   }
 
   async addTodo(newTodo: ITodoItem): Promise<ReturnProps> {
