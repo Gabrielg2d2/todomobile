@@ -7,6 +7,8 @@ type ReturnProps = {
 };
 
 export class TodoMain {
+  listTodo: ITodoItem[] = [];
+
   constructor(private repository = new Repository()) {}
 
   async toggleDone(currentTodo: ITodoItem): Promise<ReturnProps> {
@@ -33,7 +35,7 @@ export class TodoMain {
       };
     }
 
-    const todoList = await this.repository.getTodoAll();
+    const todoList = this.listTodo;
     const todoAlreadyExists = todoList.find(
       (todoItem) => todoItem.title === newTodo.title
     );
@@ -67,6 +69,8 @@ export class TodoMain {
   }
 
   async getTodoAll(): Promise<ITodoItem[]> {
-    return await this.repository.getTodoAll();
+    const result = await this.repository.getTodoAll();
+    this.listTodo = result;
+    return result;
   }
 }
