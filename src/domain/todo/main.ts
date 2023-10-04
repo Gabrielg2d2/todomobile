@@ -1,5 +1,6 @@
 import { ITodoItem, NewTodoType } from "./repository/interfaces";
 import { Repository } from "./repository/repository";
+import { Service } from "./service/todo";
 
 type ReturnProps = {
   errorMessages: string[];
@@ -9,7 +10,10 @@ type ReturnProps = {
 export class TodoMain {
   listTodo: ITodoItem[] = [];
 
-  constructor(private repository = new Repository()) {}
+  constructor(
+    private repository = new Repository(),
+    private service = Service
+  ) {}
 
   async toggleDone(currentTodo: ITodoItem): Promise<ReturnProps> {
     if (!currentTodo.id)
@@ -35,17 +39,20 @@ export class TodoMain {
       };
     }
 
-    const todoAlreadyExists = this.listTodo.find(
-      (todoItem) => todoItem.title === newTodo.title
-    );
-    if (todoAlreadyExists) {
+    const check = this.service.todoAlreadyExists(this.listTodo, newTodo);
+    if (check) {
       return {
         errorMessages: ["O todo já existe"],
         success: false,
       };
     }
 
-    await this.repository.addTodoItem(newTodo);
+    const todo = {
+      title: newTodo.title,
+      isDone: false,
+    };
+
+    await this.repository.addTodoItem(todo);
 
     return {
       errorMessages: [],
