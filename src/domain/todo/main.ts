@@ -1,15 +1,15 @@
-import { TodoItem, TodoRepository } from "./@types";
+import { IRepository, ITodoItem } from "./repository/interfaces";
 
 export class TodoMain {
-  constructor(private repository: TodoRepository) {}
+  constructor(private repository: IRepository) {}
 
-  async toggleDone(currentTodo: TodoItem): Promise<void> {
+  async toggleDone(currentTodo: ITodoItem): Promise<void> {
     const todo = { ...currentTodo };
     todo.isDone = !todo.isDone;
     await this.repository.updateTodoItem(todo);
   }
 
-  async addTodo(newTodo: TodoItem): Promise<void> {
+  async addTodo(newTodo: ITodoItem): Promise<void> {
     // verifica se o título é vazio
     // verifica se o título já existe
     await this.repository.addTodoItem(newTodo);
@@ -20,7 +20,7 @@ export class TodoMain {
     await this.repository.removeTodoItem(id);
   }
 
-  async getTodoAll(): Promise<TodoItem[]> {
+  async getTodoAll(): Promise<ITodoItem[]> {
     return await this.repository.getTodoAll();
   }
 }
