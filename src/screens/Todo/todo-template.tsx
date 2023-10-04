@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { styles } from "./styles";
 import { ITodoItem, NewTodoType } from "../../domain/todo/main";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 type TodoTemplateProps = {
   listTodo: ITodoItem[];
@@ -23,6 +23,22 @@ export default function TodoTemplate(props: TodoTemplateProps) {
   function handleInputTodoChange(text: string) {
     setValueInputTodo(text);
   }
+
+  const emptyListTodoComponent = useMemo(
+    () =>
+      !props.listTodo.length && (
+        <View style={styles.emptyListTodo}>
+          <Image source={require("../../assets/clipboard/clip.png")} />
+          <Text style={styles.emptyListTodoText}>
+            Você ainda não tem tarefas cadastradas
+          </Text>
+          <Text style={styles.emptyListTodoTextAlert}>
+            Crie tarefas e organize seus itens a fazer
+          </Text>
+        </View>
+      ),
+    [props.listTodo]
+  );
 
   return (
     <View style={styles.container}>
@@ -62,17 +78,7 @@ export default function TodoTemplate(props: TodoTemplateProps) {
         </View>
       </View>
 
-      {!props.listTodo.length && (
-        <View style={styles.emptyListTodo}>
-          <Image source={require("../../assets/clipboard/clip.png")} />
-          <Text style={styles.emptyListTodoText}>
-            Você ainda não tem tarefas cadastradas
-          </Text>
-          <Text style={styles.emptyListTodoTextAlert}>
-            Crie tarefas e organize seus itens a fazer
-          </Text>
-        </View>
-      )}
+      {emptyListTodoComponent}
 
       <FlatList
         style={styles.listTodo}
