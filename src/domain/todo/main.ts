@@ -47,12 +47,7 @@ export class TodoMain {
       };
     }
 
-    const todo = {
-      title: newTodo.title,
-      isDone: false,
-    };
-
-    await this.repository.addTodoItem(todo);
+    await this.repository.addTodoItem(newTodo);
 
     return {
       errorMessages: [],
