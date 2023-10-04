@@ -1,5 +1,18 @@
 # todo-mobile
 
+### Tecnologias usada no projeto:
+
+- React-Native
+- Expo
+- React-native-async-storage/async-storage
+- Typescript
+
+### Comando para rodar o projeto:
+
+```jsx
+npm run start ou yarn start ou npx expor start
+```
+
 Este é um projeto simples, desenvolvido para consolidar meus conhecimentos em React Native.
 
 O objetivo central do projeto é gerenciar uma lista de tarefas ("to-dos").
@@ -34,23 +47,10 @@ Mantive o máximo possível do projeto nativo, evitando instalação de diversas
 
 Também, optei por trabalhar salvando as informações local, isso pode ser facilmente alterado, graças ao DDD, basta trocar o adaptador da pasta de ‘repositorio’.
 
-![mobiel.jpeg](todo-mobile%20d413d2a83924401e8fa16efc56a0f585/mobiel.jpeg)
+<img src="./doc/mobile.png" width="500" height="300" />
 
-![mobile1.jpeg](todo-mobile%20d413d2a83924401e8fa16efc56a0f585/mobile1.jpeg)
+<img src="./doc/mobile1.png" width="500" height="300" />
 
-![mobile2.jpeg](todo-mobile%20d413d2a83924401e8fa16efc56a0f585/mobile2.jpeg)
+<img src="./doc/mobile2.png" width="500" height="300" />
 
-![mobile3.jpeg](todo-mobile%20d413d2a83924401e8fa16efc56a0f585/mobile3.jpeg)
-
-### Tecnologias usada no projeto:
-
-- React-Native
-- Expo
-- React-native-async-storage/async-storage
-- Typescript
-
-### Comando para rodar o projeto:
-
-```jsx
-npm run start ou yarn start ou npx expor start
-```
+<img src="./doc/mobile3.png" width="500" height="300" />
