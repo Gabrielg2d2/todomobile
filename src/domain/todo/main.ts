@@ -41,9 +41,19 @@ export class TodoMain {
     };
   }
 
-  async removeTodo(id: string): Promise<void> {
-    // verifica se o id existe
+  async removeTodo(id: string): Promise<ReturnProps> {
+    if (!id) {
+      return {
+        errorMessages: ["O id não pode ser vazio"],
+        success: false,
+      };
+    }
     await this.repository.removeTodoItem(id);
+
+    return {
+      errorMessages: [],
+      success: true,
+    };
   }
 
   async getTodoAll(): Promise<ITodoItem[]> {
