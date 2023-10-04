@@ -48,10 +48,10 @@ Mantive o máximo possível do projeto nativo, evitando instalação de diversas
 
 Também, optei por trabalhar salvando as informações local, isso pode ser facilmente alterado, graças ao DDD, basta trocar o adaptador da pasta de ‘repositorio’.
 
-<img src="./doc/mobile.jpeg" width="250" height="300" />
+<img src="./doc/mobile.jpeg" width="250" height="500" />
 
-<img src="./doc/mobile1.jpeg" width="250" height="300" />
+<img src="./doc/mobile1.jpeg" width="250" height="500" />
 
-<img src="./doc/mobile2.jpeg" width="250" height="300" />
+<img src="./doc/mobile2.jpeg" width="250" height="500" />
 
-<img src="./doc/mobile3.jpeg" width="250" height="300" />
+<img src="./doc/mobile3.jpeg" width="250" height="500" />
