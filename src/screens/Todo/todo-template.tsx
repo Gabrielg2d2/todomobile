@@ -10,8 +10,8 @@ import { styles } from "./styles";
 
 type TodoTemplateProps = {
   listTodo: Array<{
-    value: string;
-    todo: boolean;
+    title: string;
+    isDone: boolean;
   }>;
   handleDeleteTodo: () => void;
   handleAddTodo: () => void;
@@ -64,9 +64,9 @@ export default function TodoTemplate(props: TodoTemplateProps) {
         style={styles.listTodo}
         data={props.listTodo}
         renderItem={({ item }) => (
-          <View key={item.value} style={styles.cardTodo}>
+          <View key={item.title} style={styles.cardTodo}>
             <TouchableOpacity>
-              {item.todo ? (
+              {item.isDone ? (
                 <Image
                   source={require("../../assets/checkTrue/checkTrue.png")}
                 />
@@ -76,7 +76,7 @@ export default function TodoTemplate(props: TodoTemplateProps) {
                 />
               )}
             </TouchableOpacity>
-            <Text style={styles.cardTodoText}>{item.value}</Text>
+            <Text style={styles.cardTodoText}>{item.title}</Text>
             <TouchableOpacity
               style={styles.cardTodoIconTrash}
               onPress={props.handleDeleteTodo}

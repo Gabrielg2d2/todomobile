@@ -4,32 +4,32 @@ import TodoTemplate from "./todo-template";
 export function Todo() {
   const [listTodo, setListTodo] = useState([
     {
-      value: "Lista de tarefas 1",
-      todo: false,
+      title: "Lista de tarefas 1",
+      isDone: false,
     },
     {
-      value: "Lista de tarefas 2",
-      todo: true,
+      title: "Lista de tarefas 2",
+      isDone: true,
     },
     {
-      value: "Lista de tarefas 3",
-      todo: false,
+      title: "Lista de tarefas 3",
+      isDone: false,
     },
     {
-      value: "Lista de tarefas 4",
-      todo: true,
+      title: "Lista de tarefas 4",
+      isDone: true,
     },
     {
-      value: "Lista de tarefas 5",
-      todo: false,
+      title: "Lista de tarefas 5",
+      isDone: false,
     },
     {
-      value: "Lista de tarefas 6",
-      todo: false,
+      title: "Lista de tarefas 6",
+      isDone: false,
     },
     {
-      value: "Lista de tarefas 7",
-      todo: false,
+      title: "Lista de tarefas 7",
+      isDone: false,
     },
   ]);
 
