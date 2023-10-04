@@ -15,7 +15,11 @@ export class AdapterLocalStorage implements IAdapterRepository {
       if (result) {
         const todoListCurrent = JSON.parse(result);
         todoListCurrent.push(todoEntity);
-        await AsyncStorage.setItem(this.key, JSON.stringify(todoListCurrent));
+
+        return await AsyncStorage.setItem(
+          this.key,
+          JSON.stringify(todoListCurrent)
+        );
       }
 
       await AsyncStorage.setItem(this.key, JSON.stringify([todoEntity]));

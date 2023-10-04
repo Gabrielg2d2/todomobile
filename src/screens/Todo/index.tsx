@@ -7,10 +7,10 @@ export function Todo() {
   const [todoMain] = useState(new TodoMain());
   const [listTodo, setListTodo] = useState<ITodoItem[]>([]);
 
-  async function getAllTodo() {
+  const getAllTodo = useCallback(async () => {
     const result = await todoMain.getTodoAll();
     setListTodo(result);
-  }
+  }, []);
 
   async function handleDeleteTodo(id: string) {
     const result = await todoMain.removeTodo(id);
@@ -48,7 +48,7 @@ export function Todo() {
 
   useEffect(() => {
     getAllTodo();
-  }, [listTodo]);
+  }, [getAllTodo]);
 
   const templateProps = {
     listTodo,
