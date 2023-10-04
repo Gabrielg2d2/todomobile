@@ -16,11 +16,12 @@ export class TodoMain {
   ) {}
 
   async toggleDone(currentTodo: ITodoItem): Promise<ReturnProps> {
-    if (!currentTodo.id)
+    if (!currentTodo.id || !currentTodo.title) {
       return {
-        errorMessages: ["O id não pode ser vazio"],
+        errorMessages: ["O id ou título não pode ser vazio"],
         success: false,
       };
+    }
     const todo = { ...currentTodo };
     todo.isDone = !todo.isDone;
     await this.repository.updateTodoItem(todo);
