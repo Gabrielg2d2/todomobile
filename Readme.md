@@ -11,6 +11,7 @@
 
 ```jsx
 npm run start ou yarn start ou npx expor start
+
 ```
 
 Este é um projeto simples, desenvolvido para consolidar meus conhecimentos em React Native.
@@ -47,10 +48,10 @@ Mantive o máximo possível do projeto nativo, evitando instalação de diversas
 
 Também, optei por trabalhar salvando as informações local, isso pode ser facilmente alterado, graças ao DDD, basta trocar o adaptador da pasta de ‘repositorio’.
 
-<img src="./doc/mobile.png" width="500" height="300" />
+<img src="./doc/mobile.jpeg" width="500" height="300" />
 
-<img src="./doc/mobile1.png" width="500" height="300" />
+<img src="./doc/mobile1.jpeg" width="500" height="300" />
 
-<img src="./doc/mobile2.png" width="500" height="300" />
+<img src="./doc/mobile2.jpeg" width="500" height="300" />
 
-<img src="./doc/mobile3.png" width="500" height="300" />
+<img src="./doc/mobile3.jpeg" width="500" height="300" />
