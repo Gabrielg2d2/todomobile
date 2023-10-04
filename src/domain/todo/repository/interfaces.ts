@@ -4,6 +4,8 @@ export type ITodoItem = {
   isDone: boolean;
 };
 
+export type NewTodoType = Omit<ITodoItem, "id">;
+
 export interface IRepository {
   addTodoItem(todoItem: ITodoItem): Promise<void>;
   removeTodoItem(id: string): Promise<void>;

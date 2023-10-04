@@ -1,10 +1,10 @@
 import { AdapterLocalStorage } from "./adapter-local-storage";
-import { IRepository, ITodoItem } from "./interfaces";
+import { IRepository, ITodoItem, NewTodoType } from "./interfaces";
 
 export class Repository implements IRepository {
   constructor(private adapter = new AdapterLocalStorage()) {}
 
-  async addTodoItem(todoItem: ITodoItem): Promise<void> {
+  async addTodoItem(todoItem: NewTodoType): Promise<void> {
     await this.adapter.add(todoItem);
   }
   async removeTodoItem(id: string): Promise<void> {

@@ -1,10 +1,10 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { IAdapterRepository, ITodoItem } from "./interfaces";
+import { IAdapterRepository, ITodoItem, NewTodoType } from "./interfaces";
 
 export class AdapterLocalStorage implements IAdapterRepository {
   key = "todoList";
 
-  async add(todoItem: ITodoItem): Promise<void> {
+  async add(todoItem: NewTodoType): Promise<void> {
     try {
       const result = await AsyncStorage.getItem(this.key);
       if (result) {

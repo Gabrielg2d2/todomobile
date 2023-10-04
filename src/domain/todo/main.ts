@@ -1,4 +1,4 @@
-import { ITodoItem } from "./repository/interfaces";
+import { ITodoItem, NewTodoType } from "./repository/interfaces";
 import { Repository } from "./repository/repository";
 
 type ReturnProps = {
@@ -27,7 +27,7 @@ export class TodoMain {
     };
   }
 
-  async addTodo(newTodo: ITodoItem): Promise<ReturnProps> {
+  async addTodo(newTodo: NewTodoType): Promise<ReturnProps> {
     if (!newTodo.title) {
       return {
         errorMessages: ["O título não pode ser vazio"],
@@ -35,8 +35,7 @@ export class TodoMain {
       };
     }
 
-    const todoList = this.listTodo;
-    const todoAlreadyExists = todoList.find(
+    const todoAlreadyExists = this.listTodo.find(
       (todoItem) => todoItem.title === newTodo.title
     );
     if (todoAlreadyExists) {
@@ -45,6 +44,7 @@ export class TodoMain {
         success: false,
       };
     }
+
     await this.repository.addTodoItem(newTodo);
 
     return {
