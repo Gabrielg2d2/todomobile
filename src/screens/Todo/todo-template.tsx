@@ -15,6 +15,7 @@ type TodoTemplateProps = {
   }>;
   handleDeleteTodo: () => void;
   handleAddTodo: () => void;
+  handleToggleTodo: () => void;
 };
 
 export default function TodoTemplate(props: TodoTemplateProps) {
@@ -65,7 +66,7 @@ export default function TodoTemplate(props: TodoTemplateProps) {
         data={props.listTodo}
         renderItem={({ item }) => (
           <View key={item.title} style={styles.cardTodo}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={props.handleToggleTodo}>
               {item.isDone ? (
                 <Image
                   source={require("../../assets/checkTrue/checkTrue.png")}

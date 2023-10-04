@@ -41,10 +41,15 @@ export function Todo() {
     console.log("Task added!");
   };
 
+  const handleToggleTodo = () => {
+    console.log("Task toggled!");
+  };
+
   const templateProps = {
     listTodo,
     handleDeleteTodo,
     handleAddTodo,
+    handleToggleTodo,
   };
 
   return <TodoTemplate {...templateProps} />;
