@@ -49,7 +49,7 @@ I kept the project as native as possible, avoiding the installation of many libr
 Also, I chose to save the information locally. This can be easily changed thanks to DDD, just change the adapter in the 'repository' folder.
 
 <div style="display: flex; justify-content: space-between;">
-<img src="./doc/mobile.jpeg" width="250" height="500" />
-<img src="./doc/mobile1.jpeg" width="250" height="500" />
-<img src="./doc/mobile2.jpeg" width="250" height="500" />
+<img src="./doc/mobile.png" width="250" height="500" />
+<img src="./doc/mobile1.png" width="250" height="500" />
+<img src="./doc/mobile2.png" width="250" height="500" />
 </div>
