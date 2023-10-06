@@ -53,3 +53,19 @@ Also, I chose to save the information locally. This can be easily changed thanks
 <img src="./doc/mobile1.png" width="250" height="500" />
 <img src="./doc/mobile2.png" width="250" height="500" />
 </div>
+
+### Run the project with IOS:
+
+Download the Expo Go app, then read the QR-Code below:
+
+<div style="display: flex; justify-content: align-items: center;">
+<img src="./doc/qr-code-ios.png" width="250" height="250" />
+</div>
+
+### Run the project with Android:
+
+Download the Expo Go app, then read the QR-Code below:
+
+<div style="display: flex; justify-content: align-items: center;">
+<img src="./doc/qr-code-android.png" width="250" height="250" />
+</div>
