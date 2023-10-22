@@ -14,6 +14,15 @@ npm run start ou yarn start ou npx expor start
 
 ```
 
+### Gif
+
+<div style="margin-top: 30px; margin-bottom: 30px; width: 100%; display: flex; flex-direction: column; align-items: center; border: 2px solid #e0e0e0; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+  <p style="margin-bottom: 10px;">Project Demonstration</p>
+  <img src="./doc/mobile8.gif" width="250" height="500" alt="gif project" />
+</div>
+
+### Description
+
 This is a simple project, developed to solidify my knowledge in React Native.
 
 The core objective of the project is to manage a to-do list.
@@ -47,12 +56,6 @@ Keeping up with the best practice of separating the layers makes it easier for a
 I kept the project as native as possible, avoiding the installation of many libraries.
 
 Also, I chose to save the information locally. This can be easily changed thanks to DDD, just change the adapter in the 'repository' folder.
-
-<div style="display: flex; justify-content: space-between;">
-<img src="./doc/mobile.png" width="250" height="500" />
-<img src="./doc/mobile1.png" width="250" height="500" />
-<img src="./doc/mobile2.png" width="250" height="500" />
-</div>
 
 ### Run the project with IOS:
 
