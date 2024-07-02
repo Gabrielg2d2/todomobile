@@ -1,26 +1,24 @@
 import { ITodoItem } from "../global/types/itemTodo";
 import { NewTodoType } from "../global/types/newTodo";
-import { GetListTodoSub } from "./sub/getListTodo/subMain";
+import { AddTodoSub } from "./sub/addTodo/mainSub";
+import { GetListTodoSub } from "./sub/getListTodo/mainSub";
 import { ToggleDoneSub } from "./sub/toggleDone/mainSub";
 
 type IConstructor = {
   getListTodoSub: GetListTodoSub;
   toggleDoneSub: ToggleDoneSub;
-};
-
-type IDataTodo = {
-  listTodo: ITodoItem[];
-  allTodoCompleted: number;
-  quantityTodoCreated: number;
+  addTodoSub: AddTodoSub;
 };
 
 export class TodoMainV2 {
   private getListTodoSub = new GetListTodoSub();
   private toggleDoneSub = new ToggleDoneSub();
+  private addTodoSub = new AddTodoSub();
 
   constructor(props?: IConstructor) {
     props?.getListTodoSub && (this.getListTodoSub = props.getListTodoSub);
     props?.toggleDoneSub && (this.toggleDoneSub = props.toggleDoneSub);
+    props?.addTodoSub && (this.addTodoSub = props.addTodoSub);
   }
 
   async getListTodo() {
@@ -33,6 +31,7 @@ export class TodoMainV2 {
   }
 
   async addTodo(newTodo: NewTodoType) {
+    await this.addTodoSub.execute(newTodo);
     return await this.getListTodo();
   }
 

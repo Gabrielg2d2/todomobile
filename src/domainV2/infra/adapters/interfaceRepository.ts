@@ -1,4 +1,4 @@
-import { ITodoItem } from "../../../todo/repository/interfaces";
+import { ITodoItem } from "../../global/types/itemTodo";
 
 export interface IAdapterRepository {
   add(todoItem: ITodoItem): Promise<void>;

@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ITodoItem } from "../../../global/types/itemTodo";
 import { NewTodoType } from "../../../global/types/newTodo";
-import { IAdapterRepository } from "./interface";
+import { IAdapterRepository } from "../interfaceRepository";
 
 export class AdapterLocalStorage implements IAdapterRepository {
   private readonly key = "todoList";
