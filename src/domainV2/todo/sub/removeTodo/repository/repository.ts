@@ -6,7 +6,7 @@ export class Repository {
 
   async removeTodo(id: string) {
     try {
-      await this.adapter.remove(id);
+      await this.adapter.delete(id);
 
       return {
         data: true,

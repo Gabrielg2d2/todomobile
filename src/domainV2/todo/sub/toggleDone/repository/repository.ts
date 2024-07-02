@@ -7,7 +7,7 @@ export class Repository {
 
   async toggleDone(todoItemUpdate: ITodoItem) {
     try {
-      await this.adapter.update(todoItemUpdate);
+      await this.adapter.put(todoItemUpdate);
 
       return {
         data: true,

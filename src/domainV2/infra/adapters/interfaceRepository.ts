@@ -1,8 +1,8 @@
 import { ITodoItem } from "../../global/types/itemTodo";
 
 export interface IAdapterRepository {
-  add(todoItem: ITodoItem): Promise<void>;
-  remove(id: string): Promise<void>;
-  update(todoItem: ITodoItem): Promise<void>;
-  getListTodo(): Promise<ITodoItem[]>;
+  post(todoItem: ITodoItem): Promise<void>;
+  delete(id: string): Promise<void>;
+  put(todoItem: ITodoItem): Promise<void>;
+  get(): Promise<ITodoItem[]>;
 }

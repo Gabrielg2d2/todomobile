@@ -6,7 +6,7 @@ import { IAdapterRepository } from "../interfaceRepository";
 export class AdapterLocalStorage implements IAdapterRepository {
   private readonly key = "todoList";
 
-  async add(todoItem: NewTodoType): Promise<void> {
+  async post(todoItem: NewTodoType): Promise<void> {
     try {
       const todoEntity = {
         id: Math.random().toString(),
@@ -26,11 +26,11 @@ export class AdapterLocalStorage implements IAdapterRepository {
 
       await AsyncStorage.setItem(this.key, JSON.stringify([todoEntity]));
     } catch (error) {
-      console.error("add-adapter: ", error);
+      console.error("post: ", error);
     }
   }
 
-  async remove(id: string): Promise<void> {
+  async delete(id: string): Promise<void> {
     try {
       const result = await AsyncStorage.getItem(this.key);
       if (result) {
@@ -41,11 +41,11 @@ export class AdapterLocalStorage implements IAdapterRepository {
         await AsyncStorage.setItem(this.key, JSON.stringify(todoListNew));
       }
     } catch (error) {
-      console.error("remove-adapter: ", error);
+      console.error("delete: ", error);
     }
   }
 
-  async update(todoItemUpdate: ITodoItem): Promise<void> {
+  async put(todoItemUpdate: ITodoItem): Promise<void> {
     try {
       const result = await AsyncStorage.getItem(this.key);
       if (result) {
@@ -58,11 +58,11 @@ export class AdapterLocalStorage implements IAdapterRepository {
         await AsyncStorage.setItem(this.key, JSON.stringify(todoListNew));
       }
     } catch (error) {
-      console.error("update-adapter: ", error);
+      console.error("put: ", error);
     }
   }
 
-  async getListTodo(): Promise<ITodoItem[]> {
+  async get(): Promise<ITodoItem[]> {
     try {
       const result = await AsyncStorage.getItem(this.key);
       if (result) {
@@ -70,7 +70,7 @@ export class AdapterLocalStorage implements IAdapterRepository {
       }
       return [];
     } catch (error) {
-      console.error("getAll-adapter: ", error);
+      console.error("get: ", error);
       return [];
     }
   }

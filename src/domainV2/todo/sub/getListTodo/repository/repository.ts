@@ -6,7 +6,7 @@ export class Repository {
 
   async getListTodo() {
     try {
-      const result = await this.adapter.getListTodo();
+      const result = await this.adapter.get();
 
       return {
         data: result,

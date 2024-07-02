@@ -7,7 +7,7 @@ export class Repository {
 
   async addTodo(newTodo: NewTodoType) {
     try {
-      await this.adapter.add(newTodo);
+      await this.adapter.post(newTodo);
 
       return {
         data: true,
