@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import {
   FlatList,
   Image,
@@ -6,9 +7,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { styles } from "./styles";
 import { ITodoItem, NewTodoType } from "../../domain/todo/main";
-import { useMemo, useState } from "react";
+import { styles } from "./styles";
 
 type TodoTemplateProps = {
   listTodo: ITodoItem[];

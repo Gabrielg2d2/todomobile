@@ -1,10 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
-import TodoTemplate from "./todo-template";
-import { ITodoItem, NewTodoType, TodoMain } from "../../domain/todo/main";
 import { Alert } from "react-native";
+import { ITodoItem, NewTodoType, TodoMain } from "../../domain/todo/main";
+import { ITypeMessage } from "../../domainV2/global/types/typeMessage";
+import { TodoMainV2 } from "../../domainV2/todo/main";
+import TodoTemplate from "./todoTemplate";
 
 export function Todo() {
   const [todoMain] = useState(new TodoMain());
+  const [todoMainV2] = useState(new TodoMainV2());
   const [listTodo, setListTodo] = useState<ITodoItem[]>([]);
   const [informationTodos, setInformationTodos] = useState({
     quantityTodoCreated: 0,
@@ -12,11 +15,22 @@ export function Todo() {
   });
 
   const getAllTodo = useCallback(async () => {
-    const result = await todoMain.getTodoAll();
-    setListTodo(result.listTodo);
+    const result = await todoMainV2.getListTodo();
+
+    if (result.typeMessage !== ITypeMessage.SUCCESS) {
+      setListTodo([]);
+      setInformationTodos({
+        quantityTodoCreated: 0,
+        allTodoCompleted: 0,
+      });
+      Alert.alert("Erro", result.message);
+      return;
+    }
+
+    setListTodo(result.data.listTodo);
     setInformationTodos({
-      quantityTodoCreated: result.quantityTodoCreated,
-      allTodoCompleted: result.allTodoCompleted,
+      quantityTodoCreated: result.data.quantityTodoCreated,
+      allTodoCompleted: result.data.allTodoCompleted,
     });
   }, []);
 
