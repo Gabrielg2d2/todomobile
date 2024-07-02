@@ -1,24 +1,23 @@
-import { NewTodoType } from "../../../../global/types/newTodo";
 import { ITypeMessage } from "../../../../global/types/typeMessage";
 import { AdapterLocalStorage } from "../../../../infra/adapters/localStorage/localStorage";
 
 export class Repository {
   constructor(private adapter = new AdapterLocalStorage()) {}
 
-  async addTodo(newTodo: NewTodoType) {
+  async removeTodo(id: string) {
     try {
-      await this.adapter.add(newTodo);
+      await this.adapter.remove(id);
 
       return {
         data: true,
         typeMessage: ITypeMessage.SUCCESS,
-        message: "Novo todo adicionado com sucesso",
+        message: "Todo removido com sucesso",
       };
     } catch (error) {
       return {
         data: false,
         typeMessage: ITypeMessage.ERROR,
-        message: "Erro ao adicionar novo todo",
+        message: "Erro ao remover todo",
       };
     }
   }

@@ -15,7 +15,12 @@ export class Repository {
         message: "",
       };
     } catch (error) {
-      throw new Error();
+      return {
+        data: false,
+        typeMessage: ITypeMessage.ERROR,
+        message:
+          "Erro ao atualizar o status do todo, tente novamente mais tarde.",
+      };
     }
   }
 }
