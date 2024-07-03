@@ -23,7 +23,7 @@ interface ITodoMain {
 export { IReturnDefault, ITodoItemEntity };
 
 export class TodoMain implements ITodoMain {
-  private listTodoEntity = new ListTodoEntity();
+  constructor(private listTodoEntity = new ListTodoEntity()) {}
 
   async getListTodo() {
     return await this.listTodoEntity.getList();
