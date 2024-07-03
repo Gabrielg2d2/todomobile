@@ -15,10 +15,10 @@ export class Repository {
         message: "Novo todo adicionado com sucesso",
       };
     } catch (error) {
-      return {
+      throw {
         data: false,
         typeMessage: ITypeMessage.ERROR,
-        message: "Erro ao adicionar novo todo",
+        message: "Erro ao adicionar novo todo, tente novamente!",
       };
     }
   }

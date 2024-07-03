@@ -4,6 +4,14 @@ import { ITypeMessage } from "../../../../global/types/typeMessage";
 import { Repository } from "./repository/repository";
 import { Service } from "./service/service";
 
+type IError =
+  | {
+      data: boolean;
+      typeMessage: ITypeMessage;
+      message: string;
+    }
+  | any;
+
 export class AddTodoSub {
   constructor(
     private readonly repository = new Repository(),
@@ -11,24 +19,40 @@ export class AddTodoSub {
   ) {}
 
   async execute(listTodo: ITodoItem[], newTodo: NewTodoType) {
-    if (!newTodo.title) {
+    try {
+      if (!newTodo.title) {
+        throw {
+          data: false,
+          typeMessage: ITypeMessage.ERROR,
+          message: "Título do todo não pode ser vazio",
+        };
+      }
+
+      const isExists = this.service.todoAlreadyExists(listTodo, newTodo);
+
+      if (isExists) {
+        throw {
+          data: false,
+          typeMessage: ITypeMessage.ERROR,
+          message: "Todo já existe",
+        };
+      }
+
+      return await this.repository.addTodo(newTodo);
+    } catch (error: IError) {
+      if (error.typeMessage) {
+        return {
+          data: error.data,
+          typeMessage: error.TypeMessage,
+          message: error.message,
+        };
+      }
+
       return {
         data: false,
         typeMessage: ITypeMessage.ERROR,
-        message: "Título do todo não pode ser vazio",
+        message: "Erro ao adicionar todo",
       };
     }
-
-    const isExists = this.service.todoAlreadyExists(listTodo, newTodo);
-
-    if (isExists) {
-      return {
-        data: false,
-        typeMessage: ITypeMessage.ERROR,
-        message: "Todo já existe",
-      };
-    }
-
-    return await this.repository.addTodo(newTodo);
   }
 }
