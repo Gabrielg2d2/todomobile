@@ -1,4 +1,4 @@
-import { ITypeMessage } from "../../../global/types/typeMessage";
+import { ITypeMessage } from "../../global/types/typeMessage";
 import { Repository } from "./repository/repository";
 import { Service } from "./service/service";
 

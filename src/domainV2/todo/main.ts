@@ -1,6 +1,6 @@
-import { ITodoItem } from "../global/types/itemTodo";
-import { NewTodoType } from "../global/types/newTodo";
-import { ITypeMessage } from "../global/types/typeMessage";
+import { ITodoItem } from "./global/types/itemTodo";
+import { NewTodoType } from "./global/types/newTodo";
+import { ITypeMessage } from "./global/types/typeMessage";
 import { AddTodoSub } from "./sub/addTodo/mainSub";
 import { GetListTodoSub } from "./sub/getListTodo/mainSub";
 import { RemoveTodoSub } from "./sub/removeTodo/mainSub";

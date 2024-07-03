@@ -1,4 +1,4 @@
-import { ITodoItem } from "../../../../../../global/types/itemTodo";
+import { ITodoItem } from "../../../../../global/types/itemTodo";
 
 export class SeparateTodo {
   execute(listTodo: ITodoItem[]) {

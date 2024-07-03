@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Alert } from "react-native";
 import { ITodoItem, NewTodoType } from "../../domain/todo/main";
-import { ITypeMessage } from "../../domainV2/global/types/typeMessage";
 import { IReturnDefault, TodoMainV2 } from "../../domainV2/todo/main";
+import { toastCustom } from "../../global/functions/toastCustom";
 import TodoTemplate from "./todoTemplate";
 
 export function Todo() {
@@ -20,11 +19,7 @@ export function Todo() {
       allTodoCompleted: result.data.allTodoCompleted,
     });
 
-    if (result.typeMessage !== ITypeMessage.SUCCESS) {
-      if (result.message) Alert.alert("Erro", result.message);
-      return;
-    }
-    if (result.message) Alert.alert("Sucesso", result.message);
+    toastCustom({ typeMessage: result.typeMessage, message: result.message });
   }
 
   const getAllTodo = useCallback(async () => {

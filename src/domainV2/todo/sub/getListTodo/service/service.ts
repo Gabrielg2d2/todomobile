@@ -1,4 +1,4 @@
-import { ITodoItem } from "../../../../global/types/itemTodo";
+import { ITodoItem } from "../../../global/types/itemTodo";
 import { SeparateTodo } from "./functions/separateTodo";
 
 export class Service {

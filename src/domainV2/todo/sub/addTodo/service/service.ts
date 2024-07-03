@@ -1,5 +1,5 @@
-import { ITodoItem } from "../../../../global/types/itemTodo";
-import { NewTodoType } from "../../../../global/types/newTodo";
+import { ITodoItem } from "../../../global/types/itemTodo";
+import { NewTodoType } from "../../../global/types/newTodo";
 import { TodoAlreadyExists } from "./functions/todoAlreadyExists";
 
 export class Service {
