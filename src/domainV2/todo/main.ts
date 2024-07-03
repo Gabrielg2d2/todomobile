@@ -13,7 +13,7 @@ type IConstructor = {
   removeTodoSub: RemoveTodoSub;
 };
 
-type IReturnDefault = Promise<{
+export type IReturnDefault = {
   data: {
     listTodo: ITodoItem[];
     allTodoCompleted: number;
@@ -21,7 +21,7 @@ type IReturnDefault = Promise<{
   };
   typeMessage: ITypeMessage;
   message: string;
-}>;
+};
 
 type IDataTodo = {
   listTodo: ITodoItem[];
@@ -48,13 +48,13 @@ export class TodoMainV2 {
     props?.removeTodoSub && (this.removeTodoSub = props.removeTodoSub);
   }
 
-  async getListTodo(): IReturnDefault {
+  async getListTodo(): Promise<IReturnDefault> {
     const result = await this.getListTodoSub.execute();
     this.dataTodo = result.data;
     return result;
   }
 
-  async toggleDone(currentTodo: ITodoItem): IReturnDefault {
+  async toggleDone(currentTodo: ITodoItem): Promise<IReturnDefault> {
     const result = await this.toggleDoneSub.execute(currentTodo);
 
     if (result.typeMessage !== ITypeMessage.SUCCESS) {
@@ -68,7 +68,7 @@ export class TodoMainV2 {
     return await this.getListTodo();
   }
 
-  async addTodo(newTodo: NewTodoType): IReturnDefault {
+  async addTodo(newTodo: NewTodoType): Promise<IReturnDefault> {
     const result = await this.addTodoSub.execute(
       this.dataTodo.listTodo,
       newTodo
@@ -85,7 +85,7 @@ export class TodoMainV2 {
     return await this.getListTodo();
   }
 
-  async removeTodo(id: string): IReturnDefault {
+  async removeTodo(id: string): Promise<IReturnDefault> {
     const result = await this.removeTodoSub.execute(id);
 
     if (result.typeMessage !== ITypeMessage.SUCCESS) {

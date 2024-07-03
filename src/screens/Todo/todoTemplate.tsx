@@ -1,5 +1,6 @@
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
+  Alert,
   FlatList,
   Image,
   Text,
@@ -16,9 +17,9 @@ type TodoTemplateProps = {
     quantityTodoCreated: number;
     allTodoCompleted: number;
   };
-  handleDeleteTodo: (id: string) => void;
-  handleAddTodo: (newTodo: NewTodoType) => void;
-  handleToggleTodo: (todo: ITodoItem) => void;
+  handleDeleteTodo: (id: string) => Promise<void>;
+  handleAddTodo: (newTodo: NewTodoType) => Promise<void>;
+  handleToggleTodo: (todo: ITodoItem) => Promise<void>;
 };
 
 export default function TodoTemplate(props: TodoTemplateProps) {
@@ -26,6 +27,25 @@ export default function TodoTemplate(props: TodoTemplateProps) {
 
   function handleInputTodoChange(text: string) {
     setValueInputTodo(text);
+  }
+
+  function deleteTodo(id: string) {
+    Alert.alert(
+      "Excluir",
+      "Deseja realmente excluir este item?",
+      [
+        {
+          text: "Não",
+          onPress: () => {},
+          style: "cancel",
+        },
+        {
+          text: "Sim",
+          onPress: async () => await props.handleDeleteTodo(id),
+        },
+      ],
+      { cancelable: false }
+    );
   }
 
   const emptyListTodoComponent = useMemo(
@@ -112,7 +132,7 @@ export default function TodoTemplate(props: TodoTemplateProps) {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.cardTodoIconTrash}
-              onPress={() => props.handleDeleteTodo(item.id)}
+              onPress={() => deleteTodo(item.id)}
             >
               <Image source={require("../../assets/trash/trash.png")} />
             </TouchableOpacity>
