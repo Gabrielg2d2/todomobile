@@ -1,21 +1,33 @@
 import { ITypeMessage } from "../../../../global/types/typeMessage";
+import { ToggleDoneSub } from "./sub/toggleDone/mainSub";
 
 export interface ITodoItemEntity {
-  id: string;
-  title: string;
-  isDone: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  getData: {
+    id: string;
+    title: string;
+    isDone: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+  toggleDone: () => Promise<{
+    data: boolean;
+    typeMessage: ITypeMessage;
+    message: string;
+  }>;
 }
 
-export class TodoItem {
-  private id: string = "";
-  private title: string = "";
-  private isDone: boolean = false;
-  private createdAt: Date = new Date();
-  private updatedAt: Date = new Date();
+export class TodoItemEntity implements ITodoItemEntity {
+  constructor(
+    private id: string,
+    private title: string,
+    private isDone: boolean = false,
+    private createdAt: Date = new Date(),
+    private updatedAt: Date = new Date()
+  ) {
+    this.create(id, title);
+  }
 
-  create(id: string, title: string): boolean {
+  private create(id: string, title: string) {
     if (!id) {
       throw {
         data: false,
@@ -37,11 +49,9 @@ export class TodoItem {
     this.isDone = false;
     this.createdAt = new Date();
     this.updatedAt = new Date();
-
-    return true;
   }
 
-  toggleDone(): void {
+  toggleDone() {
     if (!this.id || !this.title) {
       throw {
         data: false,
@@ -52,9 +62,11 @@ export class TodoItem {
 
     this.isDone = !this.isDone;
     this.updatedAt = new Date();
+    const toggleDoneSub = new ToggleDoneSub();
+    return toggleDoneSub.execute(this.getData);
   }
 
-  get getData(): ITodoItemEntity {
+  get getData() {
     if (!this.id || !this.title) {
       throw {
         data: false,

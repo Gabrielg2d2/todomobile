@@ -1,3 +1,3 @@
-import { ITodoItem } from "./itemTodo";
-
-export type NewTodoType = Omit<ITodoItem, "id">;
+export type NewTodoType = {
+  title: string;
+};
