@@ -18,6 +18,8 @@ export class TodoMainV2 {
   private addTodoSub = new AddTodoSub();
   private removeTodoSub = new RemoveTodoSub();
 
+  private listTodo: ITodoItem[] = [];
+
   constructor(props?: IConstructor) {
     props?.getListTodoSub && (this.getListTodoSub = props.getListTodoSub);
     props?.toggleDoneSub && (this.toggleDoneSub = props.toggleDoneSub);
@@ -26,7 +28,9 @@ export class TodoMainV2 {
   }
 
   async getListTodo() {
-    return await this.getListTodoSub.execute();
+    const result = await this.getListTodoSub.execute();
+    this.listTodo = result.data.listTodo;
+    return result;
   }
 
   async toggleDone(currentTodo: ITodoItem) {
@@ -35,7 +39,7 @@ export class TodoMainV2 {
   }
 
   async addTodo(newTodo: NewTodoType) {
-    await this.addTodoSub.execute(newTodo);
+    await this.addTodoSub.execute(this.listTodo, newTodo);
     return await this.getListTodo();
   }
 
