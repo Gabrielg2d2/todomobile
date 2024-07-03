@@ -1,11 +1,11 @@
 import { NewTodoType } from "../../global/types/newTodo";
 import { ITypeMessage } from "../../global/types/typeMessage";
 import { ListTodoEntity } from "./entity/ListTodo/mainEntity";
-import { TodoItemEntity } from "./entity/TodoItem/mainEntity";
+import { ITodoItemEntity, TodoItemEntity } from "./entity/TodoItem/mainEntity";
 
-export type IReturnDefault = {
+type IReturnDefault = {
   data: {
-    listTodo: TodoItemEntity[];
+    listTodo: ITodoItemEntity[];
     allTodoCompleted: number;
     quantityTodoCreated: number;
   };
@@ -13,22 +13,32 @@ export type IReturnDefault = {
   message: string;
 };
 
-export class TodoMain {
+interface ITodoMain {
+  getListTodo: () => Promise<IReturnDefault>;
+  addTodo: (newTodo: NewTodoType) => Promise<IReturnDefault>;
+  removeTodo: (id: string) => Promise<IReturnDefault>;
+  toggleDone: (currentTodo: TodoItemEntity) => Promise<IReturnDefault>;
+}
+
+export { IReturnDefault, ITodoItemEntity };
+
+export class TodoMain implements ITodoMain {
   private listTodoEntity = new ListTodoEntity();
 
-  async getListTodo(): Promise<IReturnDefault> {
+  async getListTodo() {
     return await this.listTodoEntity.getList();
   }
 
-  async addTodo(newTodo: NewTodoType): Promise<IReturnDefault> {
+  async addTodo(newTodo: NewTodoType) {
     return await this.listTodoEntity.add(newTodo);
   }
 
-  async removeTodo(id: string): Promise<IReturnDefault> {
+  async removeTodo(id: string) {
     return await this.listTodoEntity.remove(id);
   }
 
-  async toggleDone(currentTodo: TodoItemEntity): Promise<IReturnDefault> {
+  // TODO: talvez o toggleDone não precise retornar a lista de todos
+  async toggleDone(currentTodo: TodoItemEntity) {
     await currentTodo.toggleDone();
     return await this.listTodoEntity.getList();
   }
