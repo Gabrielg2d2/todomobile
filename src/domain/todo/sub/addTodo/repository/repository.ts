@@ -7,16 +7,16 @@ export class Repository {
 
   async addTodo(newTodo: NewTodoType) {
     try {
-      await this.adapter.post(newTodo);
+      const result = await this.adapter.post(newTodo);
 
       return {
-        data: true,
+        data: result.data,
         typeMessage: ITypeMessage.SUCCESS,
         message: "Novo todo adicionado com sucesso",
       };
     } catch (error) {
       throw {
-        data: false,
+        data: null,
         typeMessage: ITypeMessage.ERROR,
         message: "Erro ao adicionar novo todo, tente novamente!",
       };

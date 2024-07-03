@@ -1,6 +1,7 @@
 import { ITodoItem } from "../../../../global/types/itemTodo";
 import { NewTodoType } from "../../../../global/types/newTodo";
 import { ITypeMessage } from "../../../../global/types/typeMessage";
+import { TodoItem } from "../../entity/TodoItem/mainEntity";
 import { Repository } from "./repository/repository";
 import { Service } from "./service/service";
 
@@ -20,25 +21,17 @@ export class AddTodoSub {
 
   async execute(listTodo: ITodoItem[], newTodo: NewTodoType) {
     try {
-      if (!newTodo.title) {
-        throw {
-          data: false,
-          typeMessage: ITypeMessage.ERROR,
-          message: "Título do todo não pode ser vazio",
-        };
-      }
+      this.service.todoAlreadyExists(listTodo, newTodo);
 
-      const isExists = this.service.todoAlreadyExists(listTodo, newTodo);
+      const result = await this.repository.addTodo(newTodo);
+      const todoItemEntity = new TodoItem();
+      todoItemEntity.create(result.data.id, result.data.title);
 
-      if (isExists) {
-        throw {
-          data: false,
-          typeMessage: ITypeMessage.ERROR,
-          message: "Todo já existe",
-        };
-      }
-
-      return await this.repository.addTodo(newTodo);
+      return {
+        data: todoItemEntity.getData,
+        typeMessage: result.typeMessage,
+        message: result.message,
+      };
     } catch (error: IError) {
       if (error.typeMessage) {
         return {

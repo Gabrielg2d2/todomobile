@@ -6,7 +6,7 @@ import { IAdapterRepository } from "../interfaceRepository";
 export class AdapterLocalStorage implements IAdapterRepository {
   private readonly key = "todoList";
 
-  async post(todoItem: NewTodoType): Promise<void> {
+  async post(todoItem: NewTodoType) {
     try {
       const todoEntity = {
         id: Math.random().toString(),
@@ -18,19 +18,23 @@ export class AdapterLocalStorage implements IAdapterRepository {
         const todoListCurrent = JSON.parse(result);
         todoListCurrent.push(todoEntity);
 
-        return await AsyncStorage.setItem(
-          this.key,
-          JSON.stringify(todoListCurrent)
-        );
+        await AsyncStorage.setItem(this.key, JSON.stringify(todoListCurrent));
+        return Promise.resolve({
+          data: todoListCurrent,
+        });
       }
 
       await AsyncStorage.setItem(this.key, JSON.stringify([todoEntity]));
+
+      return Promise.resolve({
+        data: [todoEntity],
+      });
     } catch (error) {
-      console.error("post: ", error);
+      return Promise.reject(error);
     }
   }
 
-  async delete(id: string): Promise<void> {
+  async delete(id: string) {
     try {
       const result = await AsyncStorage.getItem(this.key);
       if (result) {
@@ -39,13 +43,19 @@ export class AdapterLocalStorage implements IAdapterRepository {
           (todoItem: ITodoItem) => todoItem.id !== id
         );
         await AsyncStorage.setItem(this.key, JSON.stringify(todoListNew));
+
+        return Promise.resolve({
+          data: true,
+        });
       }
+
+      return Promise.reject();
     } catch (error) {
-      console.error("delete: ", error);
+      return Promise.reject(error);
     }
   }
 
-  async put(todoItemUpdate: ITodoItem): Promise<void> {
+  async put(todoItemUpdate: ITodoItem) {
     try {
       const result = await AsyncStorage.getItem(this.key);
       if (result) {
@@ -56,22 +66,32 @@ export class AdapterLocalStorage implements IAdapterRepository {
             : todoItemCurrent
         );
         await AsyncStorage.setItem(this.key, JSON.stringify(todoListNew));
+
+        return Promise.resolve({
+          data: todoItemUpdate,
+        });
       }
+
+      return Promise.reject();
     } catch (error) {
-      console.error("put: ", error);
+      return Promise.reject(error);
     }
   }
 
-  async get(): Promise<ITodoItem[]> {
+  async get() {
     try {
       const result = await AsyncStorage.getItem(this.key);
       if (result) {
-        return JSON.parse(result);
+        return Promise.resolve({
+          data: JSON.parse(result),
+        });
       }
-      return [];
+
+      return Promise.resolve({
+        data: [],
+      });
     } catch (error) {
-      console.error("get: ", error);
-      return [];
+      return Promise.reject(error);
     }
   }
 }
