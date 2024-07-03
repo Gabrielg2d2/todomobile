@@ -11,6 +11,14 @@ export class AddTodoSub {
   ) {}
 
   async execute(listTodo: ITodoItem[], newTodo: NewTodoType) {
+    if (!newTodo.title) {
+      return {
+        data: false,
+        typeMessage: ITypeMessage.ERROR,
+        message: "Título do todo não pode ser vazio",
+      };
+    }
+
     const isExists = this.service.todoAlreadyExists(listTodo, newTodo);
 
     if (isExists) {
