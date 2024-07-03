@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ITodoItem } from "../../../todo/global/types/itemTodo";
-import { NewTodoType } from "../../../todo/global/types/newTodo";
+import { ITodoItem } from "../../../../global/types/itemTodo";
+import { NewTodoType } from "../../../../global/types/newTodo";
 import { IAdapterRepository } from "../interfaceRepository";
 
 export class AdapterLocalStorage implements IAdapterRepository {

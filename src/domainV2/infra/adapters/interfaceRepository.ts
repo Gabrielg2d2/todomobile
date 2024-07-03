@@ -1,4 +1,4 @@
-import { ITodoItem } from "../../todo/global/types/itemTodo";
+import { ITodoItem } from "../../../global/types/itemTodo";
 
 export interface IAdapterRepository {
   post(todoItem: ITodoItem): Promise<void>;

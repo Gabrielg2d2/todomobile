@@ -1,6 +1,6 @@
-import { ITodoItem } from "../../global/types/itemTodo";
-import { NewTodoType } from "../../global/types/newTodo";
-import { ITypeMessage } from "../../global/types/typeMessage";
+import { ITodoItem } from "../../../../global/types/itemTodo";
+import { NewTodoType } from "../../../../global/types/newTodo";
+import { ITypeMessage } from "../../../../global/types/typeMessage";
 import { Repository } from "./repository/repository";
 import { Service } from "./service/service";
 

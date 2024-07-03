@@ -1,5 +1,5 @@
 import { Alert } from "react-native";
-import { ITypeMessage } from "../../domainV2/todo/global/types/typeMessage";
+import { ITypeMessage } from "../types/typeMessage";
 
 type IToastCustomProps = {
   typeMessage: ITypeMessage;
