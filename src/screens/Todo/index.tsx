@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { IReturnDefault, TodoMainV2 } from "../../domainV2/todo/main";
+import { IReturnDefault, TodoMain } from "../../domain/todo/main";
 import { toastCustom } from "../../global/functions/toastCustom";
 import { ITodoItem } from "../../global/types/itemTodo";
 import { NewTodoType } from "../../global/types/newTodo";
 import TodoTemplate from "./todoTemplate";
 
 export function Todo() {
-  const [todoMain] = useState(new TodoMainV2());
+  const [todoMain] = useState(new TodoMain());
   const [listTodo, setListTodo] = useState<ITodoItem[]>([]);
   const [informationTodos, setInformationTodos] = useState({
     quantityTodoCreated: 0,

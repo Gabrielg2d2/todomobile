@@ -29,7 +29,7 @@ type IDataTodo = {
   quantityTodoCreated: number;
 };
 
-export class TodoMainV2 {
+export class TodoMain {
   private getListTodoSub = new GetListTodoSub();
   private toggleDoneSub = new ToggleDoneSub();
   private addTodoSub = new AddTodoSub();
