@@ -38,7 +38,7 @@ export class TodoMain implements ITodoMain {
   }
 
   // TODO: talvez o toggleDone não precise retornar a lista de todos
-  async toggleDone(currentTodo: TodoItemEntity) {
+  async toggleDone(currentTodo: ITodoItemEntity) {
     await currentTodo.toggleDone();
     return await this.listTodoEntity.getList();
   }

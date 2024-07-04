@@ -1,13 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { IReturnDefault, TodoMain } from "../../domain/todo/main";
+import {
+  IReturnDefault,
+  ITodoItemEntity,
+  TodoMain,
+} from "../../domain/todo/main";
 import { toastCustom } from "../../global/functions/toastCustom";
-import { ITodoItem } from "../../global/types/itemTodo";
 import { NewTodoType } from "../../global/types/newTodo";
 import TodoTemplate from "./todoTemplate";
 
 export function Todo() {
   const [todoMain] = useState(new TodoMain());
-  const [listTodo, setListTodo] = useState<ITodoItem[]>([]);
+  const [listTodo, setListTodo] = useState<ITodoItemEntity[]>([]);
   const [informationTodos, setInformationTodos] = useState({
     quantityTodoCreated: 0,
     allTodoCompleted: 0,
@@ -33,7 +36,7 @@ export function Todo() {
     handleResult(result);
   }
 
-  async function handleToggleTodo(todo: ITodoItem) {
+  async function handleToggleTodo(todo: ITodoItemEntity) {
     const result = await todoMain.toggleDone(todo);
     handleResult(result);
   }
