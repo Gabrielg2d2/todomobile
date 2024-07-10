@@ -1,16 +1,9 @@
+import { IError } from "../../../../../../global/types/erro";
+import { ITodoItem } from "../../../../../../global/types/itemTodo";
 import { NewTodoType } from "../../../../../../global/types/newTodo";
 import { ITypeMessage } from "../../../../../../global/types/typeMessage";
-import { ITodoItemEntity, TodoItemEntity } from "../../../TodoItem/mainEntity";
 import { Repository } from "./repository/repository";
 import { Service } from "./service/service";
-
-type IError =
-  | {
-      data: boolean;
-      typeMessage: ITypeMessage;
-      message: string;
-    }
-  | any;
 
 export class AddTodoSub {
   constructor(
@@ -18,26 +11,22 @@ export class AddTodoSub {
     private readonly service = new Service()
   ) {}
 
-  async execute(listTodo: ITodoItemEntity[], newTodo: NewTodoType) {
+  async execute(listTodo: ITodoItem[], newTodo: NewTodoType) {
     try {
       this.service.todoAlreadyExists(listTodo, newTodo);
 
       const result = await this.repository.addTodo(newTodo);
-      const newTodoItemEntity = new TodoItemEntity(
-        result.data.id,
-        result.data.title
-      );
 
       return {
-        data: newTodoItemEntity,
+        data: result.data,
         typeMessage: result.typeMessage,
         message: result.message,
       };
-    } catch (error: IError) {
+    } catch (error: IError<false>) {
       if (error.typeMessage) {
         return {
           data: error.data,
-          typeMessage: error.TypeMessage,
+          typeMessage: error.typeMessage,
           message: error.message,
         };
       }

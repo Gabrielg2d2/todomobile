@@ -1,29 +1,27 @@
 import React, { useCallback, useEffect, useState } from "react";
-import {
-  IReturnDefault,
-  ITodoItemEntity,
-  TodoMain,
-} from "../../domain/todo/main";
+import { IReturnDefault, ITodoItem, TodoMain } from "../../domain/todo/main";
 import { toastCustom } from "../../global/functions/toastCustom";
 import { NewTodoType } from "../../global/types/newTodo";
 import TodoTemplate from "./todoTemplate";
+import { ITypeMessage } from "../../global/types/typeMessage";
 
 export function Todo() {
   const [todoMain] = useState(new TodoMain());
-  const [listTodo, setListTodo] = useState<ITodoItemEntity[]>([]);
+  const [listTodo, setListTodo] = useState<ITodoItem[]>([]);
   const [informationTodos, setInformationTodos] = useState({
     quantityTodoCreated: 0,
     allTodoCompleted: 0,
   });
 
   function handleResult(result: IReturnDefault) {
+    toastCustom({ typeMessage: result.typeMessage, message: result.message });
+
+    if (result.typeMessage !== ITypeMessage.SUCCESS) return;
     setListTodo(result.data.listTodo);
     setInformationTodos({
       quantityTodoCreated: result.data.quantityTodoCreated,
       allTodoCompleted: result.data.allTodoCompleted,
     });
-
-    toastCustom({ typeMessage: result.typeMessage, message: result.message });
   }
 
   const getAllTodo = useCallback(async () => {
@@ -36,7 +34,7 @@ export function Todo() {
     handleResult(result);
   }
 
-  async function handleToggleTodo(todo: ITodoItemEntity) {
+  async function handleToggleTodo(todo: ITodoItem) {
     const result = await todoMain.toggleDone(todo);
     handleResult(result);
   }

@@ -1,5 +1,5 @@
+import { IError } from "../../../../../../global/types/erro";
 import { ITypeMessage } from "../../../../../../global/types/typeMessage";
-import { TodoItemEntity } from "../../../TodoItem/mainEntity";
 import { Repository } from "./repository/repository";
 import { Service } from "./service/service";
 
@@ -15,20 +15,28 @@ export class GetListTodoSub {
 
       const service = this.service.separateTodo(result.data);
 
-      const listTodoEntity: TodoItemEntity[] = result.data.map((todo: any) => {
-        return new TodoItemEntity(todo.id, todo.title);
-      });
-
       return {
         data: {
-          listTodo: listTodoEntity,
+          listTodo: result.data,
           allTodoCompleted: service.allTodoCompleted,
           quantityTodoCreated: service.quantityTodoCreated,
         },
         typeMessage: ITypeMessage.SUCCESS,
         message: "",
       };
-    } catch (error) {
+    } catch (error: IError) {
+      if (error.typeMessage) {
+        return {
+          data: {
+            listTodo: [],
+            allTodoCompleted: 0,
+            quantityTodoCreated: 0,
+          },
+          typeMessage: error.typeMessage,
+          message: error.message,
+        };
+      }
+
       return {
         data: {
           listTodo: [],

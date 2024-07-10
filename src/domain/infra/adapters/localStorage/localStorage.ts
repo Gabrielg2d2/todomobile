@@ -58,21 +58,21 @@ export class AdapterLocalStorage implements IAdapterRepository {
   async put(todoItemUpdate: ITodoItem) {
     try {
       const result = await AsyncStorage.getItem(this.key);
-      if (result) {
-        const todoListCurrent = JSON.parse(result);
-        const todoListNew = todoListCurrent.map((todoItemCurrent: ITodoItem) =>
-          todoItemCurrent.id === todoItemUpdate.id
-            ? todoItemUpdate
-            : todoItemCurrent
-        );
-        await AsyncStorage.setItem(this.key, JSON.stringify(todoListNew));
-
-        return Promise.resolve({
-          data: todoItemUpdate,
-        });
+      if (!result) {
+        return Promise.reject();
       }
 
-      return Promise.reject();
+      const todoListCurrent = JSON.parse(result);
+      const todoListNew = todoListCurrent.map((todoItemCurrent: ITodoItem) =>
+        todoItemCurrent.id === todoItemUpdate.id
+          ? todoItemUpdate
+          : todoItemCurrent
+      );
+      await AsyncStorage.setItem(this.key, JSON.stringify(todoListNew));
+
+      return Promise.resolve({
+        data: todoItemUpdate,
+      });
     } catch (error) {
       return Promise.reject(error);
     }

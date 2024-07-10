@@ -1,11 +1,11 @@
+import { ITodoItem } from "../../global/types/itemTodo";
 import { NewTodoType } from "../../global/types/newTodo";
 import { ITypeMessage } from "../../global/types/typeMessage";
 import { ListTodoEntity } from "./entity/ListTodo/mainEntity";
-import { ITodoItemEntity, TodoItemEntity } from "./entity/TodoItem/mainEntity";
 
 type IReturnDefault = {
   data: {
-    listTodo: ITodoItemEntity[];
+    listTodo: ITodoItem[];
     allTodoCompleted: number;
     quantityTodoCreated: number;
   };
@@ -17,29 +17,77 @@ interface ITodoMain {
   getListTodo: () => Promise<IReturnDefault>;
   addTodo: (newTodo: NewTodoType) => Promise<IReturnDefault>;
   removeTodo: (id: string) => Promise<IReturnDefault>;
-  toggleDone: (currentTodo: TodoItemEntity) => Promise<IReturnDefault>;
+  toggleDone: (currentTodo: ITodoItem) => Promise<IReturnDefault>;
 }
 
-export { IReturnDefault, ITodoItemEntity };
+type IDataTodo = {
+  listTodo: ITodoItem[];
+  allTodoCompleted: number;
+  quantityTodoCreated: number;
+};
+
+export type { IReturnDefault, ITodoItem };
 
 export class TodoMain implements ITodoMain {
-  constructor(private listTodoEntity = new ListTodoEntity()) {}
+  private dataTodo: IDataTodo = {
+    listTodo: [],
+    allTodoCompleted: 0,
+    quantityTodoCreated: 0,
+  };
+
+  constructor(private readonly listTodoEntity = new ListTodoEntity()) {}
 
   async getListTodo() {
-    return await this.listTodoEntity.getList();
+    const result = await this.listTodoEntity.actions.list();
+    this.dataTodo = result.data;
+    return result;
   }
 
   async addTodo(newTodo: NewTodoType) {
-    return await this.listTodoEntity.add(newTodo);
+    const result = await this.listTodoEntity.actions.add(
+      this.dataTodo.listTodo,
+      newTodo
+    );
+    if (result.typeMessage !== ITypeMessage.SUCCESS) {
+      {
+        return {
+          data: this.dataTodo,
+          typeMessage: result.typeMessage,
+          message: result.message,
+        };
+      }
+    }
+
+    return await this.getListTodo();
   }
 
   async removeTodo(id: string) {
-    return await this.listTodoEntity.remove(id);
+    const result = await this.listTodoEntity.actions.remove(id);
+    if (result.typeMessage !== ITypeMessage.SUCCESS) {
+      {
+        return {
+          data: this.dataTodo,
+          typeMessage: result.typeMessage,
+          message: result.message,
+        };
+      }
+    }
+
+    return await this.getListTodo();
   }
 
-  // TODO: talvez o toggleDone não precise retornar a lista de todos
-  async toggleDone(currentTodo: ITodoItemEntity) {
-    await currentTodo.toggleDone();
-    return await this.listTodoEntity.getList();
+  async toggleDone(currentTodo: ITodoItem) {
+    const result = await this.listTodoEntity.actions.toggle(currentTodo);
+
+    if (result.typeMessage !== ITypeMessage.SUCCESS) {
+      {
+        return {
+          data: this.dataTodo,
+          typeMessage: result.typeMessage,
+          message: result.message,
+        };
+      }
+    }
+    return await this.getListTodo();
   }
 }

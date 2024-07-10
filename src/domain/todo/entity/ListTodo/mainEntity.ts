@@ -1,38 +1,35 @@
+import { ITodoItem } from "../../../../global/types/itemTodo";
 import { NewTodoType } from "../../../../global/types/newTodo";
-import { TodoItemEntity } from "../TodoItem/mainEntity";
 import { AddTodoSub } from "./sub/addTodo/mainSub";
 import { GetListTodoSub } from "./sub/getListTodo/mainSub";
 import { RemoveTodoSub } from "./sub/removeTodo/mainSub";
-
-type IDataTodo = {
-  listTodo: TodoItemEntity[];
-  allTodoCompleted: number;
-  quantityTodoCreated: number;
-};
+import { ToggleDoneSub } from "./sub/toggleDone/mainSub";
 
 export class ListTodoEntity {
-  private dataTodo: IDataTodo = {
-    listTodo: [],
-    allTodoCompleted: 0,
-    quantityTodoCreated: 0,
-  };
-
-  async getList() {
+  private async getList() {
     const getListTodoSub = new GetListTodoSub();
-    const result = await getListTodoSub.execute();
-    this.dataTodo = result.data;
-    return result;
+    return await getListTodoSub.execute();
   }
 
-  async add(newTodo: NewTodoType) {
+  private async add(listTodo: any, newTodo: NewTodoType) {
     const addTodoSub = new AddTodoSub();
-    addTodoSub.execute(this.dataTodo.listTodo, newTodo);
-    return this.getList();
+    return await addTodoSub.execute(listTodo, newTodo);
   }
 
-  async remove(id: string) {
+  private async remove(id: string) {
     const removeTodoSub = new RemoveTodoSub();
-    await removeTodoSub.execute(id);
-    return this.getList();
+    return await removeTodoSub.execute(id);
   }
+
+  private async toggle(todo: ITodoItem) {
+    const toggleDoneSub = new ToggleDoneSub();
+    return await toggleDoneSub.execute(todo);
+  }
+
+  actions = {
+    list: this.getList,
+    add: this.add,
+    remove: this.remove,
+    toggle: this.toggle,
+  };
 }

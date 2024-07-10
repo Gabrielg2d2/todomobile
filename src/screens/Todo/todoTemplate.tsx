@@ -1,4 +1,6 @@
 import React, { useMemo, useState } from "react";
+import { styles } from "./styles";
+import { NewTodoType } from "../../global/types/newTodo";
 import {
   Alert,
   FlatList,
@@ -8,8 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { ITodoItem, NewTodoType } from "../../domain/todo/main";
-import { styles } from "./styles";
+import { ITodoItem } from "../../global/types/itemTodo";
 
 type TodoTemplateProps = {
   listTodo: ITodoItem[];
@@ -50,7 +51,7 @@ export default function TodoTemplate(props: TodoTemplateProps) {
 
   const emptyListTodoComponent = useMemo(
     () =>
-      !props.listTodo.length && (
+      !props.listTodo?.length && (
         <View style={styles.emptyListTodo}>
           <Image source={require("../../assets/clipboard/clip.png")} />
           <Text style={styles.emptyListTodoText}>
@@ -83,7 +84,6 @@ export default function TodoTemplate(props: TodoTemplateProps) {
           onPress={() => {
             props.handleAddTodo({
               title: valueInputTodo,
-              isDone: false,
             });
             setValueInputTodo("");
           }}

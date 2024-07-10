@@ -1,11 +1,11 @@
-import { TodoItemEntity } from "../../../../../../TodoItem/mainEntity";
+import { IData } from "../../../repository/repository";
 
 export class SeparateTodo {
-  execute(listTodo: TodoItemEntity[]) {
+  execute(listTodo: IData) {
     const quantityTodoCreated = listTodo.length;
 
     const allTodoCompleted = listTodo.filter(
-      (todoItem) => todoItem.getData.isDone
+      (todoItem) => todoItem.isDone
     ).length;
 
     return {

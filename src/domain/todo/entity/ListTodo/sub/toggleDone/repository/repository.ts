@@ -1,25 +1,25 @@
-import { ITodoItem } from "../../../../../../../global/types/itemTodo";
+import { NewTodoType } from "../../../../../../../global/types/newTodo";
 import { ITypeMessage } from "../../../../../../../global/types/typeMessage";
 import { AdapterLocalStorage } from "../../../../../../infra/adapters/localStorage/localStorage";
+import { ITodoItem } from "../../../../../main";
 
 export class Repository {
   constructor(private adapter = new AdapterLocalStorage()) {}
 
-  async toggleDone(todoItemUpdate: ITodoItem) {
+  async toggleDone(todoUpdate: ITodoItem) {
     try {
-      await this.adapter.put(todoItemUpdate);
+      const result = await this.adapter.put(todoUpdate);
 
       return {
-        data: true,
+        data: result.data,
         typeMessage: ITypeMessage.SUCCESS,
         message: "",
       };
     } catch (error) {
-      return {
-        data: false,
+      throw {
+        data: null,
         typeMessage: ITypeMessage.ERROR,
-        message:
-          "Erro ao atualizar o status do todo, tente novamente mais tarde.",
+        message: "API: Erro ao atualizar todo",
       };
     }
   }

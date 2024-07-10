@@ -1,5 +1,8 @@
+import { ITodoItem } from "../../../../../../../global/types/itemTodo";
 import { ITypeMessage } from "../../../../../../../global/types/typeMessage";
 import { AdapterLocalStorage } from "../../../../../../infra/adapters/localStorage/localStorage";
+
+export type IData = ITodoItem[];
 
 export class Repository {
   constructor(private adapter = new AdapterLocalStorage()) {}
@@ -9,7 +12,7 @@ export class Repository {
       const result = await this.adapter.get();
 
       return {
-        data: result.data,
+        data: result.data as IData,
         typeMessage: ITypeMessage.SUCCESS,
         message: "",
       };
@@ -17,7 +20,8 @@ export class Repository {
       throw {
         data: [],
         typeMessage: ITypeMessage.ERROR,
-        message: "Erro ao buscar lista de todos, tente novamente mais tarde.",
+        message:
+          "Erro ao buscar lista de todos, tente novamente mais tarde.123",
       };
     }
   }
