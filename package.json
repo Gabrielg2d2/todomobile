@@ -11,7 +11,8 @@
     "test:ui": "vitest --ui",
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",
-    "test:ci": "vitest run --silent"
+    "test:ci": "vitest run --silent",
+    "update:expo": "npx eas-cli update"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.19.3",
