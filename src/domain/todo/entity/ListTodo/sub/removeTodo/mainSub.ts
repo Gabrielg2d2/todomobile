@@ -11,7 +11,7 @@ export class RemoveTodoSub {
       return {
         data: result.data,
         typeMessage: ITypeMessage.SUCCESS,
-        message: "",
+        message: "Todo removido com sucesso",
       };
     } catch (error) {
       return {
