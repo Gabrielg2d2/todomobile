@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "757827181944",
+    "project_id": "todo-7da3d",
+    "storage_bucket": "todo-7da3d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757827181944:android:9a1a98bf817107ee86bc8d",
+        "android_client_info": {
+          "package_name": "com.gabrielfrancelino.todomobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeLsDPW_fg7NuGtFXc70m4zfqLjY3ownI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
