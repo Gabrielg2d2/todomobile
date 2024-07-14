@@ -1,6 +1,5 @@
+import { FirebaseAnalyticsTypes } from "@react-native-firebase/analytics";
 import React, { useMemo, useState } from "react";
-import { styles } from "./styles";
-import { NewTodoType } from "../../global/types/newTodo";
 import {
   Alert,
   FlatList,
@@ -11,6 +10,8 @@ import {
   View,
 } from "react-native";
 import { ITodoItem } from "../../global/types/itemTodo";
+import { NewTodoType } from "../../global/types/newTodo";
+import { styles } from "./styles";
 
 type TodoTemplateProps = {
   listTodo: ITodoItem[];
@@ -25,9 +26,41 @@ type TodoTemplateProps = {
 
 export default function TodoTemplate(props: TodoTemplateProps) {
   const [valueInputTodo, setValueInputTodo] = useState("");
+  let analyticsModule: FirebaseAnalyticsTypes.Module | null = null;
 
   function handleInputTodoChange(text: string) {
     setValueInputTodo(text);
+  }
+
+  async function loadAnalyticsModule() {
+    if (process.env.NODE_ENV === "production") {
+      const module = await import("@react-native-firebase/analytics");
+      analyticsModule = module.default();
+    }
+  }
+
+  async function AnalyticDeleteTodo() {
+    try {
+      // Carrega o módulo de analytics apenas se ainda não foi carregado e estamos em produção
+      if (!analyticsModule) {
+        await loadAnalyticsModule();
+      }
+
+      if (analyticsModule) {
+        await analyticsModule.logEvent("deleteTodo", {
+          id: 3745092,
+          item: "analytics",
+          description: "delete todo",
+        });
+        console.log("deleteTodo event logged successfully");
+      } else {
+        console.log(
+          "Analytics not initialized, running in non-production environment"
+        );
+      }
+    } catch (error) {
+      console.error("Failed to log deleteTodo event", error);
+    }
   }
 
   function deleteTodo(id: string) {
@@ -42,7 +75,10 @@ export default function TodoTemplate(props: TodoTemplateProps) {
         },
         {
           text: "Sim",
-          onPress: async () => await props.handleDeleteTodo(id),
+          onPress: async () => {
+            await props.handleDeleteTodo(id);
+            AnalyticDeleteTodo();
+          },
         },
       ],
       { cancelable: false }
