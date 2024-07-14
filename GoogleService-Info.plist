@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyDrAcG3e5r939R3L94O14GhpiYNc12KrN4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>757827181944</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.gabrielfrancelino.todomobile</string>
+	<key>PROJECT_ID</key>
+	<string>todo-7da3d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>todo-7da3d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:757827181944:ios:8a6cb4b53bd6a09586bc8d</string>
+</dict>
+</plist>
