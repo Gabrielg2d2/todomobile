@@ -1,5 +1,6 @@
-import { logEvent } from "firebase/analytics";
-import { analytics } from "firebaseConfig";
+import * as Analytics from "expo-firebase-analytics";
+
+import { sendAnalyticsEvent } from "firebaseConfig";
 import { useMemo, useState } from "react";
 import {
   Alert,
@@ -34,8 +35,19 @@ export default function TodoTemplate(props: TodoTemplateProps) {
 
   async function AnalyticDeleteTodo() {
     try {
-      logEvent(analytics, "notification_received");
-      console.log("deleteTodo event logged successfully");
+      sendAnalyticsEvent("notification_received", {
+        notification_type: "deleteTodo",
+        notification_message: "Todo deleted successfully",
+      });
+    } catch (error) {
+      console.error("Error in notification_received event", error);
+    }
+
+    try {
+      await Analytics.logEvent("delete_todo", {
+        screen: "Todo",
+        purpose: "Delete a todo",
+      });
     } catch (error) {
       console.error("Error in deleteTodo event", error);
     }
