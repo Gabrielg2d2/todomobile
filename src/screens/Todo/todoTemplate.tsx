@@ -1,4 +1,5 @@
-import * as Analytics from "expo-firebase-analytics";
+import { logEvent } from "firebase/analytics";
+import { analytics } from "firebaseConfig";
 import { useMemo, useState } from "react";
 import {
   Alert,
@@ -26,40 +27,17 @@ type TodoTemplateProps = {
 
 export default function TodoTemplate(props: TodoTemplateProps) {
   const [valueInputTodo, setValueInputTodo] = useState("");
-  let analyticsModule: typeof Analytics | null = null;
 
   function handleInputTodoChange(text: string) {
     setValueInputTodo(text);
   }
 
-  async function loadAnalyticsModule() {
-    // if (process.env.NODE_ENV === "production") {
-    // Não é necessário carregar o módulo dinamicamente, pois já está importado
-    analyticsModule = Analytics;
-    // }
-  }
-
   async function AnalyticDeleteTodo() {
     try {
-      // Carrega o módulo de analytics apenas se ainda não foi carregado e estamos em produção
-      if (!analyticsModule) {
-        await loadAnalyticsModule();
-      }
-
-      if (analyticsModule) {
-        await analyticsModule.logEvent("deleteTodo", {
-          id: "3745092", // Certifique-se de que o ID é uma string se for dinâmico
-          item: "analytics",
-          description: "delete todo",
-        });
-        console.log("deleteTodo event logged successfully");
-      } else {
-        console.log(
-          "Analytics not initialized, running in non-production environment"
-        );
-      }
+      logEvent(analytics, "notification_received");
+      console.log("deleteTodo event logged successfully");
     } catch (error) {
-      console.error("Failed to log deleteTodo event", error);
+      console.error("Error in deleteTodo event", error);
     }
   }
 
