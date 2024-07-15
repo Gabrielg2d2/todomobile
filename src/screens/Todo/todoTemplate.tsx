@@ -33,10 +33,10 @@ export default function TodoTemplate(props: TodoTemplateProps) {
   }
 
   async function loadAnalyticsModule() {
-    if (process.env.NODE_ENV === "production") {
-      // Não é necessário carregar o módulo dinamicamente, pois já está importado
-      analyticsModule = Analytics;
-    }
+    // if (process.env.NODE_ENV === "production") {
+    // Não é necessário carregar o módulo dinamicamente, pois já está importado
+    analyticsModule = Analytics;
+    // }
   }
 
   async function AnalyticDeleteTodo() {
