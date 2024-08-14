@@ -1,6 +1,4 @@
 import React, { useMemo, useState } from "react";
-import { styles } from "./styles";
-import { NewTodoType } from "../../global/types/newTodo";
 import {
   Alert,
   FlatList,
@@ -10,7 +8,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { ITodoItem } from "../../global/types/itemTodo";
+import { ITodoItem } from "../../../global/types/itemTodo";
+import { NewTodoType } from "../../../global/types/newTodo";
+import { styles } from "./styles";
 
 type TodoTemplateProps = {
   listTodo: ITodoItem[];
@@ -53,7 +53,7 @@ export default function TodoTemplate(props: TodoTemplateProps) {
     () =>
       !props.listTodo?.length && (
         <View style={styles.emptyListTodo}>
-          <Image source={require("../../assets/clipboard/clip.png")} />
+          <Image source={require("../../../assets/clipboard/clip.png")} />
           <Text style={styles.emptyListTodoText}>
             Você ainda não tem tarefas cadastradas
           </Text>
@@ -68,7 +68,7 @@ export default function TodoTemplate(props: TodoTemplateProps) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Image source={require("../../assets/logo/logo.png")} />
+        <Image source={require("../../../assets/logo/logo.png")} />
       </View>
       <View style={styles.alignInput}>
         <TextInput
@@ -120,11 +120,11 @@ export default function TodoTemplate(props: TodoTemplateProps) {
             >
               {item.isDone ? (
                 <Image
-                  source={require("../../assets/checkTrue/checkTrue.png")}
+                  source={require("../../../assets/checkTrue/checkTrue.png")}
                 />
               ) : (
                 <Image
-                  source={require("../../assets/checkFalse/checkFalse.png")}
+                  source={require("../../../assets/checkFalse/checkFalse.png")}
                 />
               )}
 
@@ -134,7 +134,7 @@ export default function TodoTemplate(props: TodoTemplateProps) {
               style={styles.cardTodoIconTrash}
               onPress={() => deleteTodo(item.id)}
             >
-              <Image source={require("../../assets/trash/trash.png")} />
+              <Image source={require("../../../assets/trash/trash.png")} />
             </TouchableOpacity>
           </View>
         )}

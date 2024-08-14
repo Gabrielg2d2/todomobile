@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { IReturnDefault, ITodoItem, TodoMain } from "../../domain/todo/main";
 import { toastCustom } from "../../global/functions/toastCustom";
 import { NewTodoType } from "../../global/types/newTodo";
-import TodoTemplate from "./todoTemplate";
 import { ITypeMessage } from "../../global/types/typeMessage";
+import TodoTemplate from "./template";
 
 export function Todo() {
   const [todoMain] = useState(new TodoMain());
