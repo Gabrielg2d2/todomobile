@@ -56,19 +56,3 @@ Keeping up with the best practice of separating the layers makes it easier for a
 I kept the project as native as possible, avoiding the installation of many libraries.
 
 Also, I chose to save the information locally. This can be easily changed thanks to DDD, just change the adapter in the 'repository' folder.
-
-### Run the project with IOS:
-
-Download the Expo Go app, then read the QR-Code below:
-
-<div style="display: flex; justify-content: align-items: center;">
-<img src="./doc/qr-code-ios.png" width="250" height="250" />
-</div>
-
-### Run the project with Android:
-
-Download the Expo Go app, then read the QR-Code below:
-
-<div style="display: flex; justify-content: align-items: center;">
-<img src="./doc/qr-code-android.png" width="250" height="250" />
-</div>
